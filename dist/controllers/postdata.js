@@ -34,11 +34,12 @@ const RemoEvent_Id = "b74c9809-11b3-487e-b432-cca12365b8ea";
 const moment_1 = __importDefault(require("moment"));
 const azure_storage_1 = __importDefault(require("azure-storage"));
 require('dotenv').config();
+const AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=remoblobstorage;AccountKey=2dyNCBrGp/3St5coni+Xca3mFbQA67byG6qnp81UjypSK65msMG461kPruQ/Vr0EaZS0qk9y7dxewDnnb3kcxQ==;EndpointSuffix=core.windows.net";
 const bodyParser = require('body-parser');
 const app = (0, express_1.default)();
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
-console.log(process.env.AZURE_STORAGE_CONNECTION_STRING, 'hyjyjyjyjyjyjyj');
+console.log(AZURE_STORAGE_CONNECTION_STRING, 'hyjyjyjyjyjyjyj');
 const createPostRequset = (url, token, title, desc) => __awaiter(void 0, void 0, void 0, function* () {
     //  function postItem() {
     //         let axiosConfig = {
@@ -134,7 +135,7 @@ const createPostRequsetHero = (url, token, title, pic, name) => __awaiter(void 0
     // console.log(pic,'tey54u6565ieutudrusya')
     // console.log(title,'gregrthtrht')
     //@ts-ignore
-    var blobService = azure_storage_1.default.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    var blobService = azure_storage_1.default.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
     var matches = pic.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
     var type = matches[1];
     //@ts-ignore
@@ -204,7 +205,7 @@ const createPostRequsetCeo = (url, token, title, desc, username, position, pic, 
     // console.log(username,'tey54u6565ieutudrusya')
     // console.log(position,'gregrthtrht')
     //@ts-ignore
-    var blobService = azure_storage_1.default.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    var blobService = azure_storage_1.default.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
     var matches = pic.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
     var type = matches[1];
     //@ts-ignore
@@ -277,7 +278,7 @@ const createPostRequsetNews = (url, token, title, desc, pic, name) => __awaiter(
     // console.log(username,'tey54u6565ieutudrusya')
     // console.log(position,'gregrthtrht')
     //@ts-ignore
-    var blobService = azure_storage_1.default.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    var blobService = azure_storage_1.default.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
     var matches = pic.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
     var type = matches[1];
     //@ts-ignore
@@ -349,7 +350,7 @@ const createPostRequsetEmp = (url, token, title, name, dept, pic, picname) => __
     // console.log(dept,'tey54u6565ieutudrusya')
     // console.log(position,'gregrthtrht')
     //@ts-ignore
-    var blobService = azure_storage_1.default.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    var blobService = azure_storage_1.default.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
     var matches = pic.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
     var type = matches[1];
     //@ts-ignore
@@ -899,7 +900,7 @@ const postUserQuicklinkData = (0, asyncHandler_1.default)((req, res) => __awaite
 exports.postUserQuicklinkData = postUserQuicklinkData;
 function blobStorage(image, imageName) {
     //@ts-ignore
-    var blobService = azure_storage_1.default.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    var blobService = azure_storage_1.default.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
     var matches = image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
     var type = matches[1];
     //@ts-ignore

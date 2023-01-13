@@ -21,9 +21,10 @@ const BASE_PATH = `https://graph.microsoft.com/v1.0/sites`;
 const Site_Id = 'tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43';
 const heroBannerDriveId = "b!cIcBOTQ170ygV3hcQ7aiAKUmwUfuMwpCqErIQwo2ikNSXwtOP-0VTpmA2oOYWlnu";
 const heroId = "0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4";
+const AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=remoblobstorage;AccountKey=2dyNCBrGp/3St5coni+Xca3mFbQA67byG6qnp81UjypSK65msMG461kPruQ/Vr0EaZS0qk9y7dxewDnnb3kcxQ==;EndpointSuffix=core.windows.net";
 function blobStorage(image, imageName) {
     //@ts-ignore
-    var blobService = azure_storage_1.default.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    var blobService = azure_storage_1.default.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
     var matches = image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
     if (matches !== null) {
         var type = matches[1];

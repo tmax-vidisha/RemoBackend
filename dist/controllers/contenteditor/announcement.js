@@ -26,9 +26,10 @@ const BASE_PATH = `https://graph.microsoft.com/v1.0/sites`;
 // const app = express();
 // app.use(bodyParser.json({ limit: "50mb" }))
 // app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
+const AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=remoblobstorage;AccountKey=2dyNCBrGp/3St5coni+Xca3mFbQA67byG6qnp81UjypSK65msMG461kPruQ/Vr0EaZS0qk9y7dxewDnnb3kcxQ==;EndpointSuffix=core.windows.net";
 function blobStorage(image, imageName) {
     //@ts-ignore
-    var blobService = azure_storage_1.default.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    var blobService = azure_storage_1.default.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
     var matches = image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
     var type = matches[1];
     //@ts-ignore

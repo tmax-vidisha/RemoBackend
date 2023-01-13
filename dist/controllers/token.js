@@ -20,6 +20,7 @@ const express_1 = __importDefault(require("express"));
 const azure_storage_1 = __importDefault(require("azure-storage"));
 const moment_1 = __importDefault(require("moment"));
 require('dotenv').config();
+const AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=remoblobstorage;AccountKey=2dyNCBrGp/3St5coni+Xca3mFbQA67byG6qnp81UjypSK65msMG461kPruQ/Vr0EaZS0qk9y7dxewDnnb3kcxQ==;EndpointSuffix=core.windows.net";
 const BASE_PATH = `https://graph.microsoft.com/v1.0/sites`;
 const REMO_SITE_ID = "tmxin.sharepoint.com,1649e6fd-df59-4f03-8e4b-4d765864f406,d2634703-c0cd-42f6-bfb5-c60555dbcb7d";
 const AnnouncementId = "1b883bd5-98ef-4a8c-8390-ee42ffa431f9";
@@ -49,7 +50,7 @@ exports.getToken = getToken;
 // // return variableToExport;
 // return token
 // }
-console.log(process.env.AZURE_STORAGE_CONNECTION_STRING, 'gthgtg');
+console.log(AZURE_STORAGE_CONNECTION_STRING, 'gthgtg');
 // async function ffd(){
 //     // const resp = await axios.get('https://graph.microsoft.com/v1.0/me/drive/recent?$top=5&$orderby=lastModifiedDateTime desc', {
 //     //         headers: {
@@ -93,7 +94,7 @@ const ceomsg = (url, token) => __awaiter(void 0, void 0, void 0, function* () {
         }
     });
     // console.log(res.data,'yhj7jj78i989o9l')
-    if (!process.env.AZURE_STORAGE_CONNECTION_STRING) {
+    if (!AZURE_STORAGE_CONNECTION_STRING) {
         throw Error("Azure Storage Connection string not found");
     }
     //  const blobServiceClient= await BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING)
@@ -101,7 +102,7 @@ const ceomsg = (url, token) => __awaiter(void 0, void 0, void 0, function* () {
     var blobName = res.data.value[0].fields.blobName;
     // var blobName = "CEO.png"
     // var filePath = "./Remo_Designs/CEO.png";
-    var blobService = azure_storage_1.default.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    var blobService = azure_storage_1.default.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
     var startDate = new Date();
     startDate.setMinutes(startDate.getMinutes() - 5);
     var expiryDate = new Date(startDate);
@@ -129,14 +130,14 @@ const requestgraph = (url, token) => __awaiter(void 0, void 0, void 0, function*
             'Content-Type': 'application/json'
         }
     });
-    if (!process.env.AZURE_STORAGE_CONNECTION_STRING) {
+    if (!AZURE_STORAGE_CONNECTION_STRING) {
         throw Error("Azure Storage Connection string not found");
     }
     const containerName = res.data.value[0].fields.containerName;
     var blobName = res.data.value[0].fields.blobName;
     var blobName1 = res.data.value[1].fields.blobName;
     var blobName2 = res.data.value[2].fields.blobName;
-    var blobService = azure_storage_1.default.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    var blobService = azure_storage_1.default.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
     var startDate = new Date();
     startDate.setMinutes(startDate.getMinutes() - 5);
     var expiryDate = new Date(startDate);
@@ -192,14 +193,14 @@ const requestgraphemp = (url, token) => __awaiter(void 0, void 0, void 0, functi
             'Content-Type': 'application/json'
         }
     });
-    if (!process.env.AZURE_STORAGE_CONNECTION_STRING) {
+    if (!AZURE_STORAGE_CONNECTION_STRING) {
         throw Error("Azure Storage Connection string not found");
     }
     const containerName = res.data.value[0].fields.containerName;
     var blobName = res.data.value[0].fields.blobName;
     var blobName1 = res.data.value[1].fields.blobName;
     var blobName2 = res.data.value[2].fields.blobName;
-    var blobService = azure_storage_1.default.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    var blobService = azure_storage_1.default.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
     var startDate = new Date();
     startDate.setMinutes(startDate.getMinutes() - 5);
     var expiryDate = new Date(startDate);
@@ -255,14 +256,14 @@ const requestgraphhero = (url, token) => __awaiter(void 0, void 0, void 0, funct
             'Content-Type': 'application/json'
         }
     });
-    if (!process.env.AZURE_STORAGE_CONNECTION_STRING) {
+    if (!AZURE_STORAGE_CONNECTION_STRING) {
         throw Error("Azure Storage Connection string not found");
     }
     const containerName = res.data.value[0].fields.containerName;
     var blobName = res.data.value[0].fields.blobName;
     var blobName1 = res.data.value[1].fields.blobName;
     var blobName2 = res.data.value[2].fields.blobName;
-    var blobService = azure_storage_1.default.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    var blobService = azure_storage_1.default.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
     var startDate = new Date();
     startDate.setMinutes(startDate.getMinutes() - 5);
     var expiryDate = new Date(startDate);
