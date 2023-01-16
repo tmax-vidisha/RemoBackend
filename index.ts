@@ -21,7 +21,7 @@ import cors from 'cors';
 import  mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import { json } from "body-parser";
-const SERVER_PORT = process.env.PORT || 4000;
+const SERVER_PORT = 80 ;
 import multer from "multer";
 require('dotenv').config();
 
