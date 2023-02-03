@@ -14,7 +14,8 @@ import {getToken,
     getHeroData,
     getEventsMeetings,
     getRemoNews,
-    getRemoHero
+    getRemoHero,
+    getRemoContentEditorMaster
 } from '../controllers/token'
 
 const router = Router()
@@ -33,6 +34,7 @@ router.route('/news/:token').get(getRemoNews)
 router.route('/emp/:token').get(getEmpData)
 router.route('/hero/:token').get(getRemoHero)
 router.route('/mymeetings/:token').get(getEventsMeetings)
+router.route('/contenteditormaster/:token').get(getRemoContentEditorMaster)
 // router.route('/folder').post(getFolderData)
 // router.route('/recent').get(createRequset);
 // router.route('/ssss').get(sendData)

@@ -16,6 +16,7 @@ router.route('/news/:token').get(token_1.getRemoNews);
 router.route('/emp/:token').get(token_1.getEmpData);
 router.route('/hero/:token').get(token_1.getRemoHero);
 router.route('/mymeetings/:token').get(token_1.getEventsMeetings);
+router.route('/contenteditormaster/:token').get(token_1.getRemoContentEditorMaster);
 // router.route('/folder').post(getFolderData)
 // router.route('/recent').get(createRequset);
 // router.route('/ssss').get(sendData)

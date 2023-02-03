@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getRemoHero = exports.getRemoNews = exports.getEventsMeetings = exports.createRequset = exports.getHeroData = exports.getEmpData = exports.getNewsData = exports.getCeoMsgData = exports.getNavigationData = exports.getAnnouncementData = exports.getRecentFilesData = exports.getQuicklinkData = exports.getEventData = exports.createToken = exports.getToken = void 0;
+exports.getRemoContentEditorMaster = exports.getRemoHero = exports.getRemoNews = exports.getEventsMeetings = exports.createRequset = exports.getHeroData = exports.getEmpData = exports.getNewsData = exports.getCeoMsgData = exports.getNavigationData = exports.getAnnouncementData = exports.getRecentFilesData = exports.getQuicklinkData = exports.getEventData = exports.createToken = exports.getToken = void 0;
 const axios_1 = __importDefault(require("axios"));
 const express_1 = __importDefault(require("express"));
 // const StatusCodes = require ("http-status-codes");
@@ -475,9 +475,25 @@ const getNavigationData = (0, asyncHandler_1.default)((req, res) => __awaiter(vo
         });
     }
     else {
+        // res.status(200).json({
+        //    success: true,
+        //    response :await createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Navigation_Id}/items?$expand=fields`,token)
+        // });
+        const response = 
+        // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+        // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
+        yield axios_1.default.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('NavigationHome')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`, {
+            headers: {
+                'Authorization': `Bearer ${token} `,
+                'Content-Type': 'application/json',
+                'Prefer': 'HonorNonIndexedQueriesWarningMayFailRandomly'
+            }
+        });
+        console.log(response.data.value, "meetingssssssssssssssssssssssss");
         res.status(200).json({
             success: true,
-            response: yield createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Navigation_Id}/items?$expand=fields`, token)
+            response: response.data.value,
+            // response1:responseTop.data.value
         });
     }
 }));
@@ -687,3 +703,37 @@ const getRemoHero = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, 
     }
 }));
 exports.getRemoHero = getRemoHero;
+const getRemoContentEditorMaster = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
+    // const  token = req.headers.authorization
+    // console.log(req.body)
+    const { token } = req.params;
+    //  const {token} = req.body
+    console.log(token, 'llll');
+    // console.log(req.body,'gregrthtrht')
+    if (!token) {
+        return res.status(404).json({
+            success: false,
+            error: "No Token found"
+        });
+    }
+    else {
+        const response = 
+        // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+        // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
+        yield axios_1.default.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('ContentEditorMaster')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`, {
+            headers: {
+                'Authorization': `Bearer ${token} `,
+                'Content-Type': 'application/json',
+                'Prefer': 'HonorNonIndexedQueriesWarningMayFailRandomly'
+            }
+        });
+        console.log(response.data.value, "meetingssssssssssssssssssssssss");
+        res.status(200).json({
+            success: true,
+            response: response.data.value,
+            // response1:responseTop.data.value
+        });
+    }
+}));
+exports.getRemoContentEditorMaster = getRemoContentEditorMaster;
