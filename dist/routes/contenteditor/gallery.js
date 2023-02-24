@@ -6,5 +6,5 @@ const router = (0, express_1.Router)();
 router.route('/galleryroot/:token').get(gallery_1.getAllRoot);
 router.route('/getGalleryItemChildren').post(gallery_1.getGalleryChildren);
 router.route('/remophotoGallery/uploadItem').post(gallery_1.uploadRootFolder);
-router.route('/remophotoGallery/uploadFileItem').post(gallery_1.uploadRootFile);
+// router.route('/remophotoGallery/uploadFileItem').post(uploadRootFile);
 exports.default = router;
