@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const gallery_1 = require("../../controllers/contenteditor/gallery");
+const router = (0, express_1.Router)();
+router.route('/galleryroot/:token').get(gallery_1.getAllRoot);
+router.route('/getGalleryItemChildren').post(gallery_1.getGalleryChildren);
+router.route('/remophotoGallery/uploadItem').post(gallery_1.uploadRootFolder);
+router.route('/remophotoGallery/uploadFileItem').post(gallery_1.uploadRootFile);
+exports.default = router;

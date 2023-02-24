@@ -20,6 +20,8 @@ const navigation_1 = __importDefault(require("./routes/contenteditor/navigation"
 const contenteditor_1 = __importDefault(require("./routes/contenteditor/contenteditor"));
 const emphighlight_1 = __importDefault(require("./routes/contenteditor/emphighlight"));
 const photosandvideo_1 = __importDefault(require("./routes/photoandvideo/photosandvideo"));
+const quicklinks_1 = __importDefault(require("./routes/contenteditor/quicklinks"));
+const gallery_1 = __importDefault(require("./routes/contenteditor/gallery"));
 const header_1 = __importDefault(require("./routes/header"));
 // const RemoToken = require('./controllers/token')
 // const graph = require('./routes/graph')
@@ -1380,6 +1382,6 @@ app.use(`/api/v1/lists`, graph_1.default);
 app.use(`/api/v1/sites`, workspace_1.default);
 app.use(`/api/v1/onedrive`, onedrive_1.default);
 app.use(`/api/v1/header`, header_1.default);
-app.use(`/api/v1/contentEditor`, announcement_1.default, herobannner_1.default, ceo_1.default, emphighlight_1.default, news_1.default, events_1.default, navigation_1.default, contenteditor_1.default);
+app.use(`/api/v1/contentEditor`, announcement_1.default, herobannner_1.default, ceo_1.default, emphighlight_1.default, news_1.default, events_1.default, navigation_1.default, contenteditor_1.default, quicklinks_1.default, gallery_1.default);
 app.use(`/api/v1/gallery`, photosandvideo_1.default);
 app.listen(SERVER_PORT, () => console.log(`Msal Node Auth Code Sample app listening on port ${SERVER_PORT}!`));
