@@ -11,12 +11,14 @@ router.route('/quicklink/:token').get(token_1.getQuicklinkData);
 router.route('/recentfiles/:token').get(token_1.getRecentFilesData);
 router.route('/announcement/:token').get(token_1.getAnnouncementData);
 router.route('/navigation/:token').get(token_1.getNavigationData);
+router.route('/quicklinksdata/:token').get(token_1.getRemoQuickLinkData);
 router.route('/ceomsg/:token').get(token_1.getCeoMsgData);
 router.route('/news/:token').get(token_1.getRemoNews);
 router.route('/emp/:token').get(token_1.getEmpData);
 router.route('/hero/:token').get(token_1.getRemoHero);
 router.route('/mymeetings/:token').get(token_1.getEventsMeetings);
 router.route('/contenteditormaster/:token').get(token_1.getRemoContentEditorMaster);
+router.route('/events/:token').get(token_1.getRemoEvents);
 // router.route('/folder').post(getFolderData)
 // router.route('/recent').get(createRequset);
 // router.route('/ssss').get(sendData)
