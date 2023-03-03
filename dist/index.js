@@ -49,13 +49,24 @@ app.use(body_parser_1.default.urlencoded({ limit: "50mb", extended: true, parame
 //     // allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
 //   })
 // );
-app.use((0, cors_1.default)());
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, UPDATE");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    next();
-});
+const corsOpts = {
+    origin: '*',
+    methods: [
+        'GET',
+        'POST',
+    ],
+    allowedHeaders: [
+        'Content-Type',
+    ],
+};
+app.use((0, cors_1.default)(corsOpts));
+// app.use(cors());
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, UPDATE");
+//   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+//   next();
+// })
 app.use((0, morgan_1.default)('tiny'));
 // function DataBase(){
 //   try {
