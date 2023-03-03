@@ -40,13 +40,22 @@ app.use(body_parser_1.default.json({ limit: "50mb" }));
 app.use(body_parser_1.default.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
 // app.use(express.urlencoded({limit: '25mb', extended: true}));
 // app.use(bodyParser.json({ limit: "50mb" }))
-let allowUrls = "*";
-app.use((0, cors_1.default)({
-    origin: allowUrls,
-    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT"],
-    credentials: true,
-    // allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
-}));
+// let allowUrls = "*"
+// app.use(
+//   cors({
+//     origin: allowUrls,
+//     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT"],
+//     credentials: true,
+//     // allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
+//   })
+// );
+app.use((0, cors_1.default)());
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, UPDATE");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    next();
+});
 app.use((0, morgan_1.default)('tiny'));
 // function DataBase(){
 //   try {
