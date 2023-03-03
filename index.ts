@@ -41,10 +41,13 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 5
 // app.use(bodyParser.json({ limit: "50mb" }))
 
 
-app.use(cors({
-  origin: 'https://red-moss-0dcddaf10.2.azurestaticapps.net/'
-  }
-))
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT"],
+    credentials: true,
+  })
+);
 app.use(logger('tiny'));
 // function DataBase(){
 //   try {
