@@ -41,13 +41,17 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 5
 // app.use(bodyParser.json({ limit: "50mb" }))
 
 
+let allowUrls = "*"
+
 app.use(
   cors({
-    origin: "*",
+    origin: allowUrls,
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT"],
     credentials: true,
+    // allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
   })
 );
+
 app.use(logger('tiny'));
 // function DataBase(){
 //   try {
