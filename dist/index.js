@@ -46,9 +46,9 @@ app.use((0, cors_1.default)());
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
-    if (req.method == "OPTIONS") {
-        return res.sendStatus(200);
-    }
+    // if (req.method == "OPTIONS") {
+    //     return res.sendStatus(200);
+    // }
     next();
 });
 app.use((0, morgan_1.default)('tiny'));
