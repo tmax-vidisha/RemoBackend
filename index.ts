@@ -43,7 +43,15 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 5
 // app.use(express.static("files"));
 // app.use(express.urlencoded({limit: '25mb', extended: true}));
 // app.use(bodyParser.json({ limit: "50mb" }))
-app.use(cors({ origin: true }));
+app.use(cors());
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+  if (req.method == "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
 app.use(logger('tiny'));
 // function DataBase(){
 //   try {
