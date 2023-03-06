@@ -42,15 +42,22 @@ app.use(body_parser_1.default.urlencoded({ limit: "50mb", extended: true, parame
 // app.use(express.static("files"));
 // app.use(express.urlencoded({limit: '25mb', extended: true}));
 // app.use(bodyParser.json({ limit: "50mb" }))
-app.use((0, cors_1.default)());
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
-    // if (req.method == "OPTIONS") {
-    //     return res.sendStatus(200);
-    // }
-    next();
-});
+var whitelist = ['https://red-moss-0dcddaf10.2.azurestaticapps.net', 'https://red-moss-0dcddaf10.2.azurestaticapps.net']; //white list consumers
+var corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        }
+        else {
+            callback(null, false);
+        }
+    },
+    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+    optionsSuccessStatus: 200,
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
+};
+app.use((0, cors_1.default)(corsOptions));
 app.use((0, morgan_1.default)('tiny'));
 // function DataBase(){
 //   try {
