@@ -40,7 +40,7 @@ const getCurrency = asyncHandler(async (req: Request, res: Response) => {
 
   // const  token = req.headers.authorization
   // console.log(req.body)
-  const { token } = req.params
+  const  token  = req.headers.authorization
   //  const {token} = req.body
   console.log(token, 'llll')
   // console.log(req.body,'gregrthtrht')
@@ -114,7 +114,7 @@ const getUnReadEmails = asyncHandler(async (req: Request, res: Response) => {
 
   // const  token = req.headers.authorization
   // console.log(req.body)
-  const { token } = req.params
+  const  token = req.headers.authorization
   //  const {token} = req.body
   console.log(token, 'llll')
   // console.log(req.body,'gregrthtrht')
@@ -177,7 +177,7 @@ const getMeetingsUnCount = asyncHandler(async (req: Request, res: Response) => {
 
   // const  token = req.headers.authorization
   // console.log(req.body)
-  const { token } = req.params
+  const  token  = req.headers.authorization
   //  const {token} = req.body
   console.log(token, 'llll')
   // console.log(req.body,'gregrthtrht')
@@ -216,9 +216,9 @@ const getMeetingsUnCount = asyncHandler(async (req: Request, res: Response) => {
 const getUserInfo = asyncHandler(async (req: Request, res: Response) => {
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
 
-  // const  token = req.headers.authorization
+  const  token = req.headers.authorization
   // console.log(req.body)
-  const { token } = req.params
+  // const { token } = req.params
   //  const {token} = req.body
   console.log(token, 'llll')
   // console.log(req.body,'gregrthtrht')

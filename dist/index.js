@@ -17,10 +17,10 @@ const events_1 = __importDefault(require("./routes/contenteditor/events"));
 const ceo_1 = __importDefault(require("./routes/contenteditor/ceo"));
 const news_1 = __importDefault(require("./routes/contenteditor/news"));
 const navigation_1 = __importDefault(require("./routes/contenteditor/navigation"));
+const quicklinks_1 = __importDefault(require("./routes/contenteditor/quicklinks"));
 const contenteditor_1 = __importDefault(require("./routes/contenteditor/contenteditor"));
 const emphighlight_1 = __importDefault(require("./routes/contenteditor/emphighlight"));
 const photosandvideo_1 = __importDefault(require("./routes/photoandvideo/photosandvideo"));
-const quicklinks_1 = __importDefault(require("./routes/contenteditor/quicklinks"));
 const gallery_1 = __importDefault(require("./routes/contenteditor/gallery"));
 const header_1 = __importDefault(require("./routes/header"));
 // const RemoToken = require('./controllers/token')
@@ -30,7 +30,7 @@ const morgan_1 = __importDefault(require("morgan"));
 // const axios = require('axios')
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const SERVER_PORT = 80;
+const SERVER_PORT = process.env.PORT || 4000;
 const multer_1 = __importDefault(require("multer"));
 require('dotenv').config();
 // Create Express App and Routes
@@ -38,24 +38,11 @@ const app = (0, express_1.default)();
 // app.use(express.json());
 app.use(body_parser_1.default.json({ limit: "50mb" }));
 app.use(body_parser_1.default.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
+// app.use(fileupload());
+// app.use(express.static("files"));
 // app.use(express.urlencoded({limit: '25mb', extended: true}));
 // app.use(bodyParser.json({ limit: "50mb" }))
-// let allowUrls = "*"
-// app.use(
-//   cors({
-//     origin: allowUrls,
-//     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT"],
-//     credentials: true,
-//     // allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
-//   })
-// );
 app.use((0, cors_1.default)());
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
 app.use((0, morgan_1.default)('tiny'));
 // function DataBase(){
 //   try {
@@ -1397,6 +1384,7 @@ app.use(`/api/v1/lists`, graph_1.default);
 app.use(`/api/v1/sites`, workspace_1.default);
 app.use(`/api/v1/onedrive`, onedrive_1.default);
 app.use(`/api/v1/header`, header_1.default);
+// app.use(`/api/v1/contentEditor`,announcement,herobanner,ceo,employee,news,events)
 app.use(`/api/v1/contentEditor`, announcement_1.default, herobannner_1.default, ceo_1.default, emphighlight_1.default, news_1.default, events_1.default, navigation_1.default, contenteditor_1.default, quicklinks_1.default, gallery_1.default);
 app.use(`/api/v1/gallery`, photosandvideo_1.default);
 app.listen(SERVER_PORT, () => console.log(`Msal Node Auth Code Sample app listening on port ${SERVER_PORT}!`));

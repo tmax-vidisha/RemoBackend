@@ -124,8 +124,8 @@ const postCeo = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void
     console.log(isActive, 'isActive');
     console.log(isDraft, 'isDraft');
     const Image = blobStorage(image, imageName);
-    const File = blobStorage1(Attachment, Attachmentname);
-    // console.log(Image, 'rtretrt')
+    // const File = blobStorage1(Attachment, Attachmentname)
+    console.log(Image, 'rtretrt');
     //  console.log(File, 'tththththth')
     // //    console.log( title,imageName,isActive,EnableLikes,'ytjytjytjty')
     // console.log(description,'thgtrhj67k87k87k87k87')
@@ -148,7 +148,7 @@ const postCeo = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void
         });
     }
     else {
-        //     console.log('lllllllllllllllllllllllll')
+        console.log('lllllllllllllllllllllllll');
         const Data = {
             fields: {
                 Title: title,
@@ -158,7 +158,7 @@ const postCeo = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void
                 isActive: isActive,
                 Designation: designation,
                 Name: Name,
-                Attachment: File,
+                //  Attachment:File,
                 isDraft: isDraft
                 //@ts-ignore
                 // heroUrl: response.image
@@ -176,11 +176,20 @@ const postCeo = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void
             const data = yield response.json();
             // enter you logic when the fetch is successful
             console.log(data);
+            return res.status(201).json({
+                success: true,
+                response: "List Item created"
+            });
             // return data
         }
         catch (error) {
             // enter your logic for when there is an error (ex. error toast)
             console.log(error);
+            return res.status(500).json({
+                success: false,
+                // error: error,
+                response: 'List Item Creation Failed'
+            });
         }
         //     const response = 
         //     // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {

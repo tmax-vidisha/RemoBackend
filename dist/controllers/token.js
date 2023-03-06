@@ -20,7 +20,6 @@ const express_1 = __importDefault(require("express"));
 const azure_storage_1 = __importDefault(require("azure-storage"));
 const moment_1 = __importDefault(require("moment"));
 require('dotenv').config();
-const AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=remoblobstorage;AccountKey=2dyNCBrGp/3St5coni+Xca3mFbQA67byG6qnp81UjypSK65msMG461kPruQ/Vr0EaZS0qk9y7dxewDnnb3kcxQ==;EndpointSuffix=core.windows.net";
 const BASE_PATH = `https://graph.microsoft.com/v1.0/sites`;
 const REMO_SITE_ID = "tmxin.sharepoint.com,1649e6fd-df59-4f03-8e4b-4d765864f406,d2634703-c0cd-42f6-bfb5-c60555dbcb7d";
 const AnnouncementId = "1b883bd5-98ef-4a8c-8390-ee42ffa431f9";
@@ -37,6 +36,7 @@ const RemoNews_Id = "25fb939d-87e0-4fb5-b575-f11bd916e4df";
 const RemoEmpHight_Id = "2b3bb6db-7ba9-43e9-92b4-0216b80ef2fe";
 const EventFilter = "https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,1649e6fd-df59-4f03-8e4b-4d765864f406,d2634703-c0cd-42f6-bfb5-c60555dbcb7d/lists('Events')/items?$expand=fields&$orderby=fields/EventDate asc&$filter=fields/EventDate+gt+'2022-07-25'";
 const asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
+const AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=remoblobstorage;AccountKey=2dyNCBrGp/3St5coni+Xca3mFbQA67byG6qnp81UjypSK65msMG461kPruQ/Vr0EaZS0qk9y7dxewDnnb3kcxQ==;EndpointSuffix=core.windows.net";
 const app = (0, express_1.default)();
 // const getTokens = require('./graph')
 const getToken = (req, res) => {
@@ -335,7 +335,7 @@ const getEventData = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0,
     console.log(req.headers.authorization, 'tsfff');
     //  const  token = req.headers.authorization
     // console.log(req.body)
-    const { token } = req.params;
+    const token = req.headers.authorization;
     //  const {token} = req.body
     console.log(token, 'llssdsdssdsdsdsdsll');
     // console.log(req.body,'gregrthtrht')
@@ -397,7 +397,7 @@ const getQuicklinkData = (0, asyncHandler_1.default)((req, res) => __awaiter(voi
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
     //  const  token = req.headers.authorization
     // console.log(req.body)
-    const { token } = req.params;
+    const token = req.headers.authorization;
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -419,7 +419,7 @@ const getRecentFilesData = (0, asyncHandler_1.default)((req, res) => __awaiter(v
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const { token } = req.params;
+    const token = req.headers.authorization;
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -442,7 +442,7 @@ const getAnnouncementData = (0, asyncHandler_1.default)((req, res) => __awaiter(
     // console.log(req.body)
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
     // const  token = req.headers.authorization
-    const { token } = req.params;
+    const token = req.headers.authorization;
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -464,7 +464,7 @@ const getNavigationData = (0, asyncHandler_1.default)((req, res) => __awaiter(vo
     // console.log(req.body)
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
     // const  token = req.headers.authorization
-    const { token } = req.params;
+    const token = req.headers.authorization;
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -502,7 +502,7 @@ const getRemoQuickLinkData = (0, asyncHandler_1.default)((req, res) => __awaiter
     // console.log(req.body)
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
     // const  token = req.headers.authorization
-    const { token } = req.params;
+    const token = req.headers.authorization;
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -540,7 +540,7 @@ const getCeoMsgData = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const { token } = req.params;
+    const token = req.headers.authorization;
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -600,7 +600,7 @@ const getEmpData = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, v
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const { token } = req.params;
+    const token = req.headers.authorization;
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -654,7 +654,7 @@ const getEventsMeetings = (0, asyncHandler_1.default)((req, res) => __awaiter(vo
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const { token } = req.params;
+    const token = req.headers.authorization;
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -687,7 +687,7 @@ const getRemoNews = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, 
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const { token } = req.params;
+    const token = req.headers.authorization;
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -727,7 +727,7 @@ const getRemoHero = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, 
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const { token } = req.params;
+    const token = req.headers.authorization;
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -761,7 +761,7 @@ const getRemoContentEditorMaster = (0, asyncHandler_1.default)((req, res) => __a
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const { token } = req.params;
+    const token = req.headers.authorization;
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -795,7 +795,7 @@ const getRemoEvents = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const { token } = req.params;
+    const token = req.headers.authorization;
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')

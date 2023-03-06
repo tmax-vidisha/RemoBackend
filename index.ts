@@ -12,10 +12,12 @@ import events from './routes/contenteditor/events'
 import ceo from './routes/contenteditor/ceo';
 import news from './routes/contenteditor/news';
 import navigation from './routes/contenteditor/navigation'
+import fileupload from 'express-fileupload'
+import quicklink from './routes/contenteditor/quicklinks';
+
 import contentEditor from './routes/contenteditor/contenteditor'
 import employee from './routes/contenteditor/emphighlight'
 import photosandvideo from './routes/photoandvideo/photosandvideo'
-import quicklink from './routes/contenteditor/quicklinks'; 
 import gallery from './routes/contenteditor/gallery' 
 import header from './routes/header'
 // const RemoToken = require('./controllers/token')
@@ -27,7 +29,7 @@ import cors from 'cors';
 import  mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import { json } from "body-parser";
-const SERVER_PORT = 80 ;
+const SERVER_PORT = process.env.PORT || 4000;
 import multer from "multer";
 require('dotenv').config();
 
@@ -37,27 +39,11 @@ const app = express();
 // app.use(express.json());
 app.use(bodyParser.json({ limit: "50mb" }))
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
+// app.use(fileupload());
+// app.use(express.static("files"));
 // app.use(express.urlencoded({limit: '25mb', extended: true}));
 // app.use(bodyParser.json({ limit: "50mb" }))
-
-
-// let allowUrls = "*"
-
-// app.use(
-//   cors({
-//     origin: allowUrls,
-//     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT"],
-//     credentials: true,
-//     // allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
-//   })
-// );
-app.use(cors())
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(cors());
 app.use(logger('tiny'));
 // function DataBase(){
 //   try {
@@ -1558,7 +1544,11 @@ app.use(`/api/v1/lists`,graph)
 app.use(`/api/v1/sites`,workspace)
 app.use(`/api/v1/onedrive`,onedrive)
 app.use(`/api/v1/header`,header)
+
+// app.use(`/api/v1/contentEditor`,announcement,herobanner,ceo,employee,news,events)
+
 app.use(`/api/v1/contentEditor`,announcement,herobanner,ceo,employee,news,events,navigation,contentEditor,quicklink,gallery)
+
 app.use(`/api/v1/gallery`,photosandvideo)
 
 app.listen(SERVER_PORT, () => console.log(`Msal Node Auth Code Sample app listening on port ${SERVER_PORT}!`))

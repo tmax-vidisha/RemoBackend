@@ -44,9 +44,9 @@ function Nested(arr, tokens) {
 }
 const getAllFoldersSharepointLibrary = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
-    // const  token = req.headers.authorization
+    const token = req.headers.authorization;
     // console.log(req.body)
-    const { token } = req.params;
+    // const {token} = req.params
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -130,9 +130,9 @@ const getAllItemsInFolderSharepointLibrary = (0, asyncHandler_1.default)((req, r
 exports.getAllItemsInFolderSharepointLibrary = getAllItemsInFolderSharepointLibrary;
 const getImages = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
-    // const  token = req.headers.authorization
+    const token = req.headers.authorization;
     // console.log(req.body)
-    const { token } = req.params;
+    // const {token} = req.params
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')

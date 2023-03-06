@@ -144,11 +144,20 @@ const postEmployee = asyncHandler(async (req: Request, res: Response) => {
         const data = await response.json();
         // enter you logic when the fetch is successful
         console.log(data);
+        return res.status(201).json({
+          success: true,
+          response:"List Item created"
+        });
         // return data
       } catch (error) {
         // enter your logic for when there is an error (ex. error toast)
   
         console.log(error)
+        return res.status(500).json({
+          success: false,
+          // error: error,
+          response:'List Item Creation Failed'
+        });
       }
   
   //     const response = 

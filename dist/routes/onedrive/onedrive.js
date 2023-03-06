@@ -15,4 +15,6 @@ router.route('/copylinkOneDriveItem').post(onedrive_1.copylinkDriveItem);
 router.route('/getSharedItems/:token').get(onedrive_1.getAllOneDriveSharedItems);
 router.route('/getRecentFiles/:token').get(onedrive_1.getAllOneDriveRecentFiles);
 router.route('/getRecentFiles/downloadurl').post(onedrive_1.getAllOneDriveItemDownloadUrl);
+router.route('/getStarred/:token').get(onedrive_1.getAllStarred);
+router.route('/getTrashed/:token').get(onedrive_1.getAllTrashed);
 exports.default = router;

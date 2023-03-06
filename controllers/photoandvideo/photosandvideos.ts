@@ -38,9 +38,9 @@ async function Nested(arr:any,tokens:any) {
 const getAllFoldersSharepointLibrary = asyncHandler(async(req:Request, res:Response) => {
     console.log(req.headers.authorization,'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
   
-    // const  token = req.headers.authorization
+    const  token = req.headers.authorization
     // console.log(req.body)
-    const {token} = req.params
+    // const {token} = req.params
     //  const {token} = req.body
     console.log(token,'llll')
     // console.log(req.body,'gregrthtrht')
@@ -151,9 +151,9 @@ const getAllFoldersSharepointLibrary = asyncHandler(async(req:Request, res:Respo
   const getImages = asyncHandler(async(req:Request, res:Response) => {
     console.log(req.headers.authorization,'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
   
-    // const  token = req.headers.authorization
+    const  token = req.headers.authorization
     // console.log(req.body)
-    const {token} = req.params
+    // const {token} = req.params
     //  const {token} = req.body
     console.log(token,'llll')
     // console.log(req.body,'gregrthtrht')

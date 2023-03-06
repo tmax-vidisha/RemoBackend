@@ -1,7 +1,7 @@
 import axios from 'axios'
-import express,{Request,Response} from "express";
+import express, { Request, Response } from "express";
 // const qs = require('qs');
-import fetch from'node-fetch'
+import fetch from 'node-fetch'
 // var multipart = require('connect-multiparty');  
 import upload from 'express-fileupload';
 // import {upload} from “express-fileupload”;
@@ -13,7 +13,7 @@ import PptxGenJS from 'pptxgenjs';
 import asyncHandler from '../../middleware/asyncHandler'
 import { Console } from 'console';
 // import docx from 'docx';
-const check ="https://graph.microsoft.com/v1.0/me/drive/root/children?$filter=startswith(name,'Agr.docx')"
+const check = "https://graph.microsoft.com/v1.0/me/drive/root/children?$filter=startswith(name,'Agr.docx')"
 // const { Document, Packer, Paragraph, TextRun } = docx;
 const app = express();
 // app.use(upload());
@@ -21,134 +21,134 @@ const app = express();
 // var multipartMiddleware = multipart({ maxFieldsSize: (20 * 1024 * 1024) });
 // app.use(multipartMiddleware);
 
-const uploadItemInOneDrive = asyncHandler(async(req:Request, res:Response) => {
+const uploadItemInOneDrive = asyncHandler(async (req: Request, res: Response) => {
 
-    // console.log(req.body)
-    // const {token} = req.params
-    
-    console.log(req.headers.authorization,'tssccccttddddttttvvvvvtttttttyy')
-    const  token = req.headers.authorization
-    const {  name } = req.body
-    console.log(name,'gfhtht')
-   
+  // console.log(req.body)
+  // const {token} = req.params
+
+  console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
+  const token = req.headers.authorization
+  const { name } = req.body
+  console.log(name, 'gfhtht')
 
 
-    if(!token ){
-   
+
+  if (!token) {
+
     return res.status(404).json({
-        success: false,
-        error: "No Token found"
+      success: false,
+      error: "No Token found"
     });
-  
-    }else {
-        console.log('ooo')
-        const valid = await fetch(
-  
-            //   `https://graph.microsoft.com/v1.0/me/drive/root:/${file}.xlsx:/content`,
-    
-            //https://graph.microsoft.com/v1.0/me/drive/root/children
-    
-           // `https://graph.microsoft.com/v1.0/me/drive/items/{parent-id}:/${file}.xlsx:/content`,
-    
-              `https://graph.microsoft.com/v1.0/me/drive/root/children?$filter=startswith(name,'${name}')`,
-    
-              {
-    
-                method: 'GET',
-    
-                headers: {
-                  'Authorization': `Bearer ${token} `,
-                  'Content-Type': 'application/json'
-                
-                }
-    
-              })
-        const output = await valid.json();
-        console.log(output.value,'lll')
-        //@ts-ignore
-       if (output.value?.length !== 0){
-        console.log('full')
-        res.status(409).json({
-              success: true,
-               response:`${name} file already exists`
-        
-           });
-       }
 
-      //  //create folder 
-      //  if(!name.includes(`.xlsx`) || !name.includes(`.pptx`) || !name.includes(`.docx`) && output.value?.length == 0){
-      //   const Data ={
-      //     "name":name,
-      //     "folder": {}
-      //   }
-      //    try {
-      //     const response = await fetch('https://graph.microsoft.com/v1.0/me/drive/root/children', {
-      //       method: 'POST',
-      //       headers: {
-      //        'Authorization': `Bearer ${token}`,
-      //         'Content-Type': 'application/json'
-      //         },
-      //         body:JSON.stringify(Data) 
-      //       });
-      //       const data = await response.json();
-      //       console.log(data)
-      //       if(data !== 0){
-      //         // console.log(`${name} file is created`)
-      //         res.status(201).json({
-      //           success: true,
-      //            response:`${name} folder is created`
-          
-      //        });
-      //       }
+  } else {
+    console.log('ooo')
+    // const valid = await fetch(
 
-      //    }catch{
-      //     res.status(404).json({
-      //       success: false,
-      //        response:`folder not created`
-      
-      //    });
+    //   //   `https://graph.microsoft.com/v1.0/me/drive/root:/${file}.xlsx:/content`,
 
-      //    }
+    //   //https://graph.microsoft.com/v1.0/me/drive/root/children
 
+    //   // `https://graph.microsoft.com/v1.0/me/drive/items/{parent-id}:/${file}.xlsx:/content`,
 
+    //   `https://graph.microsoft.com/v1.0/me/drive/root/children?$filter=startswith(name,'${name}')`,
+
+    //   {
+
+    //     method: 'GET',
+
+    //     headers: {
+    //       'Authorization': `Bearer ${token} `,
+    //       'Content-Type': 'application/json'
+
+    //     }
+
+    //   })
+    // const output = await valid.json();
+    // console.log(output.value, 'lll')
+    // //@ts-ignore
+    // if (output.value?.length !== 0) {
+    //   console.log('full')
+    //   res.status(409).json({
+    //     success: true,
+    //     response: `${name} file already exists`
+
+    //   });
+    // }
+
+     //create folder 
+    //  if(!name.includes(`.xlsx`) || !name.includes(`.pptx`) || !name.includes(`.docx`)){
+    //   const Data ={
+    //     "name":name,
+    //     "folder": {}
+    //   }
+    //    try {
+    //     const response = await fetch('https://graph.microsoft.com/v1.0/me/drive/root/children', {
+    //       method: 'POST',
+    //       headers: {
+    //        'Authorization': `Bearer ${token}`,
+    //         'Content-Type': 'application/json'
+    //         },
+    //         body:JSON.stringify(Data) 
+    //       });
+    //       const data = await response.json();
+    //       console.log(data)
+    //       if(data !== 0){
+    //         // console.log(`${name} file is created`)
+    //         res.status(201).json({
+    //           success: true,
+    //            response:`${name} folder is created`
+
+    //        });
+    //       }
+
+    //    }catch{
+    //     res.status(404).json({
+    //       success: false,
+    //        response:`folder not created`
+
+    //    });
+
+    //    }
 
 
-      //  }
+
+
+    //  }
     //xlsx file
     const data = [
       [" ", " "],
     ];
     //@ts-ignore
-    var buffer = xlsx.build([{name: '', data: data}]);
-    
+    var buffer = xlsx.build([{ name: '', data: data }]);
+
 
     //docx file
     const doc = new Document({
       sections: [{
-          properties: {},
-          children: [
-              new Paragraph({}),
-          ],
+        properties: {},
+        children: [
+          new Paragraph({}),
+        ],
       }],
-  });
+    });
 
-  const b64string = await Packer.toBase64String(doc);
-  const rrrr = Buffer.from(b64string, 'base64')
+    const b64string = await Packer.toBase64String(doc);
+    const rrrr = Buffer.from(b64string, 'base64')
 
 
-  //pptx  file
-  let pres = new PptxGenJS();
-  //@ts-ignore
-  // const pptData = await pres.write( 'base64')
-  // Ex using: `const app = express();``
-const eeee = await pres.stream()
-//@ts-ignore
-const www = Buffer.from(eeee, "binary")
+    //pptx  file
+    let pres = new PptxGenJS();
+    //@ts-ignore
+    // const pptData = await pres.write( 'base64')
+    // Ex using: `const app = express();``
+    const eeee = await pres.stream()
+    //@ts-ignore
+    const www = Buffer.from(eeee, "binary")
 
-//Uploading docx to onedrive
-    if (name.includes('.docx') && output.value?.length == 0){
+    //Uploading docx to onedrive
+    if (name.includes('.docx') ) {
       try {
-      const result = await fetch(
+        const result = await fetch(
           `https://graph.microsoft.com/v1.0/me/drive/root:/${name}:/content`,
 
           {
@@ -159,60 +159,60 @@ const www = Buffer.from(eeee, "binary")
 
               Authorization: `Bearer ${token}`,
 
-           
 
-            'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-            // 'Content-Type': "application/vnd.openxmlformats-officedocument.presentationml.presentation",
 
-           
+              'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              // 'Content-Type': "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+
+
 
             },
-           //@ts-ignore
-            body:rrrr
+            //@ts-ignore
+            body: rrrr
 
           })
 
         //   console.log(name,"upload excel file");
 
-      //  console.log(result)
-       const data = await result.json()
-       console.log(data)
-       if(data !== 0){
-        // console.log(`${name} file is created`)
-        res.status(201).json({
-          success: true,
-           response:`${name} file is created`
-    
-       });
+        //  console.log(result)
+        const data = await result.json()
+        console.log(data)
+        if (data !== 0) {
+          // console.log(`${name} file is created`)
+          res.status(201).json({
+            success: true,
+            response: `${name} file is created`
 
-       }
-      }catch{
+          });
+
+        }
+      } catch {
         res.status(404).json({
           success: false,
-           response:`file not created`
-    
-       });
+          response: `file not created`
+
+        });
       }
       // return result
-      
+
 
 
 
     }
-  //   else  if(!name.includes('.docx')) {
-  //     // console.log('Enter proper name')
-  //  return   res.status(400).json({
-  //       response:'Enter proper name'
-  
-  //    });
-  //   }
+    //   else  if(!name.includes('.docx')) {
+    //     // console.log('Enter proper name')
+    //  return   res.status(400).json({
+    //       response:'Enter proper name'
 
-//uploading pptx to oneDrive
-    if (name.includes('.pptx') && output.value?.length == 0){
+    //    });
+    //   }
+
+    //uploading pptx to oneDrive
+   else if (name.includes('.pptx') ) {
       try {
-      const result = await fetch(
+        const result = await fetch(
 
-        
+
           `https://graph.microsoft.com/v1.0/me/drive/root:/${name}:/content`,
 
           {
@@ -223,39 +223,39 @@ const www = Buffer.from(eeee, "binary")
 
               Authorization: `Bearer ${token}`,
 
-            
-             'Content-Type': "application/vnd.openxmlformats-officedocument.presentationml.presentation",
 
-            
+              'Content-Type': "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+
+
 
             },
-           //@ts-ignore
-            body:www
+            //@ts-ignore
+            body: www
 
           })
 
         //   console.log(name,"upload excel file");
 
-      //  console.log(result)
-       const data = await result.json();
-      console.log(data)
-      if(data !== 0){
-        console.log(`${name} file is created`)
-        res.status(201).json({
-          success: true,
-           response:`${name}  is created` 
-    
-       });
+        //  console.log(result)
+        const data = await result.json();
+        console.log(data)
+        if (data !== 0) {
+          console.log(`${name} file is created`)
+          res.status(201).json({
+            success: true,
+            response: `${name}  is created`
+
+          });
+        }
+      } catch {
+        res.status(404).json({
+          success: false,
+          response: `file not created`
+
+        });
       }
-     }catch{
-      res.status(404).json({
-        success: false,
-         response:`file not created`
-  
-     });
-     }
       // return result
-      
+
 
 
 
@@ -265,16 +265,16 @@ const www = Buffer.from(eeee, "binary")
     //   res.status(404).json({
     //     success: false,
     //      response:'Enter proper name'
-  
+
     //  });
     // }
 
-//uploading xlsx file to one drive   
-    if (name.includes('.xlsx') && output.value?.length == 0){
+    //uploading xlsx file to one drive   
+   else if (name.includes('.xlsx') ) {
       try {
-      const result = await fetch(
+        const result = await fetch(
 
-      
+
           `https://graph.microsoft.com/v1.0/me/drive/root:/${name}:/content`,
 
           {
@@ -285,48 +285,85 @@ const www = Buffer.from(eeee, "binary")
 
               Authorization: `Bearer ${token}`,
 
-             
 
-             'Content-Type': "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 
-           
+              'Content-Type': "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+
+
 
             },
-           //@ts-ignore
-            body:buffer
+            //@ts-ignore
+            body: buffer
 
           })
 
         //   console.log(name,"upload excel file");
 
-      //  console.log(result)
-       const data =await result.json()
-       if(data !== 0 ){
-        res.status(201).json({
-          success: true,
-           response:`${name}  is created` 
-    
-       });
-       }
-      }catch{
+        //  console.log(result)
+        const data = await result.json()
+        if (data !== 0) {
+          res.status(201).json({
+            success: true,
+            response: `${name}  is created`
+
+          });
+        }
+      } catch {
         res.status(404).json({
           success: false,
-           response:`file not created`
-    
-       });
+          response: `file not created`
+
+        });
 
       }
       // return result
-      
+
 
 
 
     }
+    else{
+      const Data ={
+        "name":name,
+        "folder": {}
+      }
+       try {
+        const response = await fetch('https://graph.microsoft.com/v1.0/me/drive/root/children', {
+          method: 'POST',
+          headers: {
+           'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(Data) 
+          });
+          const data = await response.json();
+          console.log(data)
+          if(data !== 0){
+            // console.log(`${name} file is created`)
+            res.status(201).json({
+              success: true,
+               response:`${name} folder is created`
+
+           });
+          }
+
+       }catch{
+        res.status(404).json({
+          success: false,
+           response:`folder not created`
+
+       });
+
+       }
 
 
 
 
-    
+     }
+
+
+
+
 
     //  const result = await fetch(
 
@@ -371,7 +408,7 @@ const www = Buffer.from(eeee, "binary")
 
     //   console.log(result)
 
-    
+
 
 
 
@@ -383,22 +420,366 @@ const www = Buffer.from(eeee, "binary")
     // res.status(200).json({
     //     success: true,
     //      response:answer
-  
+
     //  });
-  
-    
-   }
-  
+
+
+  }
+
 })
 
-const getAllOneDriveItemsRoot = asyncHandler(async(req:Request, res:Response) => {
- console.log(req.headers.authorization,'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
+const getAllOneDriveItemsRoot = asyncHandler(async (req: Request, res: Response) => {
+  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
 
-  // const  token = req.headers.authorization
- console.log(req.body)
-   const {token} = req.params
+   const  token = req.headers.authorization
+  console.log(req.body)
+  // const { token } = req.params
   // //  const {token} = req.body
-   console.log(token,'llll')
+  console.log(token, 'llll')
+  // console.log(req.body,'gregrthtrht')
+  if (!token) {
+
+    return res.status(404).json({
+      success: false,
+      error: "No Token found"
+    });
+
+  } else {
+
+    const response =
+      // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+      await axios.get(`https://graph.microsoft.com/v1.0/me/drive/root/children`, {
+        headers: {
+          'Authorization': `Bearer ${token} `,
+          'Content-Type': 'application/json'
+
+        }
+
+      })
+    console.log(response.data.value, "root")
+    res.status(200).json({
+      success: true,
+      response: response.data.value
+
+    });
+
+  }
+
+
+})
+const getOneDriveItemChildren = asyncHandler(async (req: Request, res: Response) => {
+
+  // console.log(req.body)
+  // const {token} = req.params
+
+  console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
+  const token = req.headers.authorization
+  const { ItemId, Name } = req.body
+  console.log(ItemId, Name, 'gfhtht')
+
+
+
+  if (!token) {
+
+    return res.status(404).json({
+      success: false,
+      error: "No Token found"
+    });
+
+  } else {
+    console.log('trytrtjtjytaxczc')
+    if (ItemId) {
+      const response =
+        // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+        await axios.get(`https://graph.microsoft.com/v1.0/me/drive/items/${ItemId}/children`, {
+          headers: {
+            'Authorization': `Bearer ${token} `,
+            'Content-Type': 'application/json'
+
+          }
+
+        })
+      console.log(response.data.value, "ItemChildren")
+      res.status(200).json({
+        success: true,
+        response: response.data.value
+
+      });
+    }
+    else {
+
+      const response =
+        // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+        await axios.get(`https://graph.microsoft.com/v1.0/me/drive/root/children`, {
+          headers: {
+            'Authorization': `Bearer ${token} `,
+            'Content-Type': 'application/json'
+
+          }
+
+        })
+      console.log(response.data.value, "ItemChildren")
+      res.status(200).json({
+        success: true,
+        response: response.data.value
+
+      });
+
+    }
+
+  }
+
+})
+
+
+const deleteOneDriveItem = asyncHandler(async (req: Request, res: Response) => {
+
+  // console.log(req.body)
+  // const {token} = req.params
+
+  console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
+  const token = req.headers.authorization
+  const { ItemId, Name } = req.body
+  console.log(ItemId, Name, 'treytrutusc')
+
+
+
+  if (!token) {
+
+    return res.status(404).json({
+      success: false,
+      error: "No Token found"
+    });
+
+  } else {
+    console.log('deklee')
+    if (ItemId) {
+      const response =
+        // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+        await axios.delete(`https://graph.microsoft.com/v1.0/me/drive/items/${ItemId}`, {
+          headers: {
+            'Authorization': `Bearer ${token} `,
+            'Content-Type': 'application/json'
+
+          }
+
+        })
+      const data = await response.data
+      console.log(data, 'kky')
+      res.status(200).json({
+        success: true,
+        response: data
+
+      });
+
+    }
+
+  }
+
+})
+
+
+const copylinkDriveItem = asyncHandler(async (req: Request, res: Response) => {
+
+  // console.log(req.body)
+  // const {token} = req.params
+
+  console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
+  const token = req.headers.authorization
+  const { ItemId, Name } = req.body
+  console.log(ItemId, Name, 'ewfeu87uedsfdfbfbc')
+
+
+
+  if (!token) {
+
+    return res.status(404).json({
+      success: false,
+      error: "No Token found"
+    });
+
+  } else {
+    console.log('dekleeewwrw465776uhfdbfngngn')
+    if (ItemId) {
+      const permission = {
+
+        type: "view",
+
+        scope: "anonymous"
+
+      };
+      // const response = 
+      // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+      //     await axios.post(`https://graph.microsoft.com/v1.0//me/drive/items/${ItemId}/createLink`, {
+      //     headers: {
+      //         'Authorization': `Bearer ${token} `,
+      //         'Content-Type': 'application/json'
+
+      //       },
+      //       body:permission
+
+      // })
+      // const data = await response.data
+      // console.log(data,'kky')
+      const response = await fetch(`https://graph.microsoft.com/v1.0/me/drive/items/${ItemId}/createLink`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(permission)
+      });
+      const data = await response.json();
+      console.log(data, 'rty')
+      const mydata = data.link.webUrl
+
+
+
+
+      res.status(200).json({
+        success: true,
+        response: mydata
+
+      });
+
+    }
+
+  }
+
+})
+
+const getAllOneDriveSharedItems = asyncHandler(async (req: Request, res: Response) => {
+  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
+
+  const  token = req.headers.authorization
+  console.log(req.body)
+  // const { token } = req.params
+  // //  const {token} = req.body
+  console.log(token, 'llll')
+  // console.log(req.body,'gregrthtrht')
+  if (!token) {
+
+    return res.status(404).json({
+      success: false,
+      error: "No Token found"
+    });
+
+  } else {
+
+    const response =
+      // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+      await axios.get(`https://graph.microsoft.com/v1.0/me/drive/sharedWithMe`, {
+        headers: {
+          'Authorization': `Bearer ${token} `,
+          'Content-Type': 'application/json'
+
+        }
+
+      })
+    console.log(response.data.value, "root")
+    res.status(200).json({
+      success: true,
+      response: response.data.value
+
+    });
+
+  }
+
+
+})
+const getAllOneDriveRecentFiles = asyncHandler(async (req: Request, res: Response) => {
+  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
+
+   const  token = req.headers.authorization
+  console.log(req.body)
+  // const { token } = req.params
+  // //  const {token} = req.body
+  console.log(token, 'llll')
+  // console.log(req.body,'gregrthtrht')
+  if (!token) {
+
+    return res.status(404).json({
+      success: false,
+      error: "No Token found"
+    });
+
+  } else {
+
+    const response =
+      // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+      await axios.get(`https://graph.microsoft.com/v1.0/me/drive/recent`, {
+        headers: {
+          'Authorization': `Bearer ${token} `,
+          'Content-Type': 'application/json'
+
+        }
+
+      })
+    console.log(response.data.value, "root")
+    res.status(200).json({
+      success: true,
+      response: response.data.value
+
+    });
+
+  }
+
+
+})
+
+const getAllOneDriveItemDownloadUrl = asyncHandler(async (req: Request, res: Response) => {
+  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
+  const token = req.headers.authorization
+  const { ItemId, Name } = req.body
+  console.log(ItemId, Name, 'treytrutusc')
+
+
+
+  if (!token) {
+
+    return res.status(404).json({
+      success: false,
+      error: "No Token found"
+    });
+
+  } else {
+    console.log('deklee')
+    if (ItemId) {
+      const response =
+        // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+        await axios.get(`https://graph.microsoft.com/v1.0/me/drive/items/${ItemId}`, {
+          headers: {
+            'Authorization': `Bearer ${token} `,
+            'Content-Type': 'application/json'
+
+          }
+
+        })
+      const data = await response.data
+      console.log(data["@microsoft.graph.downloadUrl"], 'kky')
+      res.status(200).json({
+        success: true,
+        response: data["@microsoft.graph.downloadUrl"]
+
+      });
+
+    }
+
+  }
+
+
+
+})
+
+
+const getAllStarred = asyncHandler(async(req:Request, res:Response) => {
+  console.log(req.headers.authorization,'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
+
+const  token = req.headers.authorization
+  // console.log(req.body)
+  // const {token} = req.params
+  //  const {token} = req.body
+  console.log(token,'llll')
   // console.log(req.body,'gregrthtrht')
   if(!token ){
  
@@ -411,7 +792,7 @@ const getAllOneDriveItemsRoot = asyncHandler(async(req:Request, res:Response) =>
     
     const response = 
     // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
-      await axios.get(`https://graph.microsoft.com/v1.0/me/drive/root/children`, {
+      await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/drives/b!cIcBOTQ170ygV3hcQ7aiAKUmwUfuMwpCqErIQwo2ikMF_Pl86wt6RJ301fEG4lAL/root/children`, {
       headers: {
           'Authorization': `Bearer ${token} `,
           'Content-Type': 'application/json'
@@ -419,10 +800,23 @@ const getAllOneDriveItemsRoot = asyncHandler(async(req:Request, res:Response) =>
         }
       
   })
-  console.log(response.data.value,"root" )
+
+  // const responseTop = 
+  //   // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+  //     await axios.get(`${BASE_PATH}/${Site_Id}/lists/${RemoNews_Id}/items?$expand=fields&$top=5`, {
+  //     headers: {
+  //         'Authorization': `Bearer ${token} `,
+  //         'Content-Type': 'application/json'
+        
+  //       }
+      
+  // })
+  console.log(response.data.value,"meetingssssssssssssssssssssssss" )
   res.status(200).json({
     success: true,
-    response :response.data.value
+    response :response.data.value,
+  //   response1:responseTop.data.value
+
 
  });
 
@@ -430,18 +824,15 @@ const getAllOneDriveItemsRoot = asyncHandler(async(req:Request, res:Response) =>
   
 
 })
-const getOneDriveItemChildren = asyncHandler(async(req:Request, res:Response) => {
+const getAllTrashed = asyncHandler(async(req:Request, res:Response) => {
+  console.log(req.headers.authorization,'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
 
+  const  token = req.headers.authorization
   // console.log(req.body)
   // const {token} = req.params
-  
-  console.log(req.headers.authorization,'tssccccttddddttttvvvvvtttttttyy')
-  const  token = req.headers.authorization
-  const {  ItemId,Name } = req.body
-  console.log(ItemId,Name,'gfhtht')
- 
-
-
+  //  const {token} = req.body
+  console.log(token,'llll')
+  // console.log(req.body,'gregrthtrht')
   if(!token ){
  
   return res.status(404).json({
@@ -450,11 +841,10 @@ const getOneDriveItemChildren = asyncHandler(async(req:Request, res:Response) =>
   });
 
   }else {
-     console.log('trytrtjtjytaxczc')
-     if(ItemId ) {
-     const response = 
+    
+    const response = 
     // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
-      await axios.get(`https://graph.microsoft.com/v1.0/me/drive/items/${ItemId}/children`, {
+      await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/drives/b!cIcBOTQ170ygV3hcQ7aiAKUmwUfuMwpCqErIQwo2ikPA6Y9HwDJ4TLznL7CJStDS/root/children`, {
       headers: {
           'Authorization': `Bearer ${token} `,
           'Content-Type': 'application/json'
@@ -462,287 +852,44 @@ const getOneDriveItemChildren = asyncHandler(async(req:Request, res:Response) =>
         }
       
   })
-  console.log(response.data.value,"ItemChildren" )
-  res.status(200).json({
-    success: true,
-    response :response.data.value
 
- });
- }
- else{
-    
-  const response = 
-  // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
-    await axios.get(`https://graph.microsoft.com/v1.0/me/drive/root/children`, {
-    headers: {
-        'Authorization': `Bearer ${token} `,
-        'Content-Type': 'application/json'
-      
-      }
-    
-   } )
-   console.log(response.data.value,"ItemChildren" )
-  res.status(200).json({
-    success: true,
-    response :response.data.value
-
- });
-
- }
-
- }
-
-})
-
-
-const deleteOneDriveItem = asyncHandler(async(req:Request, res:Response) => {
-
-  // console.log(req.body)
-  // const {token} = req.params
-  
-  console.log(req.headers.authorization,'tssccccttddddttttvvvvvtttttttyy')
-  const  token = req.headers.authorization
-  const {  ItemId,Name } = req.body
-  console.log(ItemId,Name,'treytrutusc')
- 
-
-
-  if(!token ){
- 
-  return res.status(404).json({
-      success: false,
-      error: "No Token found"
-  });
-
-  }else {
-     console.log('deklee')
-     if(ItemId ) {
-      const response = 
-    // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
-      await axios.delete(`https://graph.microsoft.com/v1.0/me/drive/items/${ItemId}`, {
-      headers: {
-          'Authorization': `Bearer ${token} `,
-          'Content-Type': 'application/json'
-        
-        }
-      
-  })
-  const data = await response.data
-  console.log(data,'kky')
-  res.status(200).json({
-    success: true,
-    response :data
-
- });
-
- }
- 
- }
-
-})
-
-
-const  copylinkDriveItem = asyncHandler(async(req:Request, res:Response) => {
-
-  // console.log(req.body)
-  // const {token} = req.params
-  
-  console.log(req.headers.authorization,'tssccccttddddttttvvvvvtttttttyy')
-  const  token = req.headers.authorization
-  const {  ItemId,Name } = req.body
-  console.log(ItemId,Name,'ewfeu87uedsfdfbfbc')
- 
-
-
-  if(!token ){
- 
-  return res.status(404).json({
-      success: false,
-      error: "No Token found"
-  });
-
-  }else {
-     console.log('dekleeewwrw465776uhfdbfngngn')
-     if(ItemId ) {
-      const permission = {
-
-        type: "view",
-
-        scope: "anonymous"
-
-    };
-      // const response = 
-    // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
-  //     await axios.post(`https://graph.microsoft.com/v1.0//me/drive/items/${ItemId}/createLink`, {
+  // const responseTop = 
+  //   // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+  //     await axios.get(`${BASE_PATH}/${Site_Id}/lists/${RemoNews_Id}/items?$expand=fields&$top=5`, {
   //     headers: {
   //         'Authorization': `Bearer ${token} `,
   //         'Content-Type': 'application/json'
         
-  //       },
-  //       body:permission
+  //       }
       
   // })
-  // const data = await response.data
-  // console.log(data,'kky')
-  const response = await fetch(`https://graph.microsoft.com/v1.0/me/drive/items/${ItemId}/createLink`, {
-    method: 'POST',
-    headers: {
-     'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-      },
-      body:JSON.stringify(permission) 
-    });
-    const data = await response.json();
-    console.log(data,'rty')
-   const mydata = data.link.webUrl
-
-
-
-
+  console.log(response.data.value,"meetingssssssssssssssssssssssss" )
   res.status(200).json({
     success: true,
-    response :mydata
+    response :response.data.value,
+  //   response1:responseTop.data.value
+
 
  });
 
- }
- 
- }
+  }
+  
 
 })
 
-const getAllOneDriveSharedItems = asyncHandler(async(req:Request, res:Response) => {
-  console.log(req.headers.authorization,'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
- 
-   // const  token = req.headers.authorization
-  console.log(req.body)
-    const {token} = req.params
-   // //  const {token} = req.body
-    console.log(token,'llll')
-   // console.log(req.body,'gregrthtrht')
-   if(!token ){
-  
-   return res.status(404).json({
-       success: false,
-       error: "No Token found"
-   });
- 
-   }else {
-     
-     const response = 
-     // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
-       await axios.get(`https://graph.microsoft.com/v1.0/me/drive/sharedWithMe`, {
-       headers: {
-           'Authorization': `Bearer ${token} `,
-           'Content-Type': 'application/json'
-         
-         }
-       
-   })
-   console.log(response.data.value,"root" )
-   res.status(200).json({
-     success: true,
-     response :response.data.value
- 
-  });
- 
-   }
-   
- 
- })
- const getAllOneDriveRecentFiles = asyncHandler(async(req:Request, res:Response) => {
-  console.log(req.headers.authorization,'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
- 
-   // const  token = req.headers.authorization
-  console.log(req.body)
-    const {token} = req.params
-   // //  const {token} = req.body
-    console.log(token,'llll')
-   // console.log(req.body,'gregrthtrht')
-   if(!token ){
-  
-   return res.status(404).json({
-       success: false,
-       error: "No Token found"
-   });
- 
-   }else {
-     
-     const response = 
-     // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
-       await axios.get(`https://graph.microsoft.com/v1.0/me/drive/recent`, {
-       headers: {
-           'Authorization': `Bearer ${token} `,
-           'Content-Type': 'application/json'
-         
-         }
-       
-   })
-   console.log(response.data.value,"root" )
-   res.status(200).json({
-     success: true,
-     response :response.data.value
- 
-  });
- 
-   }
-   
- 
- })
 
- const getAllOneDriveItemDownloadUrl = asyncHandler(async(req:Request, res:Response) => {
-  console.log(req.headers.authorization,'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  const  token = req.headers.authorization
-  const {  ItemId,Name } = req.body
-  console.log(ItemId,Name,'treytrutusc')
- 
-
-
-  if(!token ){
- 
-  return res.status(404).json({
-      success: false,
-      error: "No Token found"
-  });
-
-  }else {
-     console.log('deklee')
-     if(ItemId ) {
-      const response = 
-    // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
-      await axios.get(`https://graph.microsoft.com/v1.0/me/drive/items/${ItemId}`, {
-      headers: {
-          'Authorization': `Bearer ${token} `,
-          'Content-Type': 'application/json'
-        
-        }
-      
-  })
-  const data = await response.data
-  console.log(data["@microsoft.graph.downloadUrl"],'kky')
-  res.status(200).json({
-    success: true,
-    response :data["@microsoft.graph.downloadUrl"]
-
- });
-
- }
- 
- }
-   
-   
- 
- })
 
 
 export {
-    uploadItemInOneDrive,
-    getAllOneDriveItemsRoot,
-    getOneDriveItemChildren,
-    deleteOneDriveItem,
-    copylinkDriveItem,
-    getAllOneDriveSharedItems,
-    getAllOneDriveRecentFiles,
-    getAllOneDriveItemDownloadUrl
-   
+  uploadItemInOneDrive,
+  getAllOneDriveItemsRoot,
+  getOneDriveItemChildren,
+  deleteOneDriveItem,
+  copylinkDriveItem,
+  getAllOneDriveSharedItems,
+  getAllOneDriveRecentFiles,
+  getAllOneDriveItemDownloadUrl,
+  getAllStarred,
+  getAllTrashed
+
 }

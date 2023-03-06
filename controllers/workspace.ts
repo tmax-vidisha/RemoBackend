@@ -242,9 +242,6 @@ const getsubItemsId = asyncHandler(async(req:Request, res:Response) => {
   
 
 
-   
-   
-
    }
 })
 
