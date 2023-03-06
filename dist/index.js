@@ -27,8 +27,6 @@ const header_1 = __importDefault(require("./routes/header"));
 // const graph = require('./routes/graph')
 // var azure = require('azure-storage');
 const morgan_1 = __importDefault(require("morgan"));
-// const axios = require('axios')
-const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const SERVER_PORT = process.env.PORT || 4000;
 const multer_1 = __importDefault(require("multer"));
@@ -42,22 +40,26 @@ app.use(body_parser_1.default.urlencoded({ limit: "50mb", extended: true, parame
 // app.use(express.static("files"));
 // app.use(express.urlencoded({limit: '25mb', extended: true}));
 // app.use(bodyParser.json({ limit: "50mb" }))
-var whitelist = ['https://red-moss-0dcddaf10.2.azurestaticapps.net', 'https://red-moss-0dcddaf10.2.azurestaticapps.net']; //white list consumers
-var corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true);
-        }
-        else {
-            callback(null, false);
-        }
-    },
-    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
-    optionsSuccessStatus: 200,
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
-};
-app.use((0, cors_1.default)(corsOptions));
+// var whitelist = ['*', '*']; //white list consumers
+// var corsOptions = {
+//   origin: function (origin:any, callback:any) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(null, false);
+//     }
+//   },
+//   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+//   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+//   credentials: true, //Credentials are cookies, authorization headers or TLS client certificates.
+//   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
+// };
+// app.use(cors(corsOptions));
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use((0, morgan_1.default)('tiny'));
 // function DataBase(){
 //   try {
