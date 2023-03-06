@@ -60,6 +60,9 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+app.options('/*', (_, res) => {
+    res.sendStatus(200);
+});
 app.use((0, morgan_1.default)('tiny'));
 // function DataBase(){
 //   try {
