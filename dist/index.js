@@ -55,14 +55,15 @@ app.use(body_parser_1.default.urlencoded({ limit: "50mb", extended: true, parame
 //   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
 // };
 // app.use(cors(corsOptions));
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-app.options('/*', (_, res) => {
-    res.sendStatus(200);
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+// app.options('/*', (_, res) => {
+//   res.sendStatus(200);
+// });
+app.options('*', function (req, res) { res.sendStatus(200); });
 app.use((0, morgan_1.default)('tiny'));
 // function DataBase(){
 //   try {
