@@ -42,7 +42,7 @@ app.use(body_parser_1.default.urlencoded({ limit: "50mb", extended: true, parame
 // app.use(express.static("files"));
 // app.use(express.urlencoded({limit: '25mb', extended: true}));
 // app.use(bodyParser.json({ limit: "50mb" }))
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({ origin: true }));
 app.use((0, morgan_1.default)('tiny'));
 // function DataBase(){
 //   try {
