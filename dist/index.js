@@ -63,7 +63,18 @@ app.use(body_parser_1.default.urlencoded({ limit: "50mb", extended: true, parame
 // app.options('/*', (_, res) => {
 //   res.sendStatus(200);
 // });
-app.options('*', function (req, res) { res.sendStatus(200); });
+const corsMiddleware = (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*')
+        .header('Access-Control-Allow-Headers', 'Authorization,Accept,Origin,DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range')
+        .header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,DELETE,PATCH');
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200);
+    }
+    else {
+        next();
+    }
+};
+app.use(corsMiddleware);
 app.use((0, morgan_1.default)('tiny'));
 // function DataBase(){
 //   try {
