@@ -43,20 +43,20 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 5
 // app.use(express.static("files"));
 // app.use(express.urlencoded({limit: '25mb', extended: true}));
 // app.use(bodyParser.json({ limit: "50mb" }))
-// var whitelist = ['*', '*']; //white list consumers
-// var corsOptions = {
-//   origin: function (origin:any, callback:any) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(null, false);
-//     }
-//   },
-//   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
-//   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-//   credentials: true, //Credentials are cookies, authorization headers or TLS client certificates.
-//   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
-// };
+var whitelist = ['https://red-moss-0dcddaf10.2.azurestaticapps.net', 'https://red-moss-0dcddaf10.2.azurestaticapps.net']; //white list consumers
+var corsOptions = {
+  origin: function (origin:any, callback:any) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(null, false);
+    }
+  },
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  credentials: true, //Credentials are cookies, authorization headers or TLS client certificates.
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
+};
 
 // app.use(cors(corsOptions));
 // app.use(function(req, res, next) {
@@ -67,18 +67,18 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 5
 // app.options('/*', (_, res) => {
 //   res.sendStatus(200);
 // });
-const corsMiddleware = (req:any, res:any, next:any) => {
-  res.header('Access-Control-Allow-Origin', '*')
-      .header('Access-Control-Allow-Headers', 'Authorization,Accept,Origin,DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range')
-      .header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,DELETE,PATCH');
+// const corsMiddleware = (req:any, res:any, next:any) => {
+//   res.header('Access-Control-Allow-Origin', '*')
+//       .header('Access-Control-Allow-Headers', 'Authorization,Accept,Origin,DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range')
+//       .header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,DELETE,PATCH');
 
-  if (req.method === 'OPTIONS') {
-      res.sendStatus(200);
-  } else {
-      next();
-  }
-}
-app.use(corsMiddleware);
+//   if (req.method === 'OPTIONS') {
+//       res.sendStatus(200);
+//   } else {
+//       next();
+//   }
+// }
+// app.use(corsMiddleware);
 app.use(logger('tiny'));
 // function DataBase(){
 //   try {
@@ -1574,11 +1574,11 @@ function uploadFiles(req:any, res:any) {
 
 console.log("Remo")
 
-app.use('/api/v1/token',token)
-app.use(`/api/v1/lists`,graph)
-app.use(`/api/v1/sites`,workspace)
-app.use(`/api/v1/onedrive`,onedrive)
-app.use(`/api/v1/header`,header)
+app.use('/api/v1/token',cors(corsOptions),token)
+app.use(`/api/v1/lists`,cors(corsOptions),graph)
+app.use(`/api/v1/sites`,cors(corsOptions),workspace)
+app.use(`/api/v1/onedrive`,cors(corsOptions),onedrive)
+app.use(`/api/v1/header`,cors(corsOptions),header)
 
 // app.use(`/api/v1/contentEditor`,announcement,herobanner,ceo,employee,news,events)
 
