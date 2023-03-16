@@ -349,8 +349,8 @@ const createToken = asyncHandler(async (req: any, res: any) => {
 
 const getEventData = asyncHandler(async (req: Request, res: Response) => {
   console.log(req.headers.authorization, 'tsfff')
-  const {token} = req.params
-  //  const  token = req.headers.authorization
+  // const {token} = req.params
+  const  token = req.headers.authorization
   // console.log(req.body)
   // const  token  =req.headers.authorization
   //  const {token} = req.body
@@ -417,8 +417,8 @@ const getEventData = asyncHandler(async (req: Request, res: Response) => {
 
 const getQuicklinkData = asyncHandler(async (req: Request, res: Response) => {
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  const {token} = req.params
-  //  const  token = req.headers.authorization
+  // const {token} = req.params
+    const  token = req.headers.authorization
   // console.log(req.body)
   // const  token  = req.headers.authorization
   //  const {token} = req.body
@@ -445,8 +445,8 @@ const getQuicklinkData = asyncHandler(async (req: Request, res: Response) => {
 
 const getRecentFilesData = asyncHandler(async (req: Request, res: Response) => {
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  const {token} = req.params
-  // const  token = req.headers.authorization
+  // const {token} = req.params
+ const  token = req.headers.authorization
   // console.log(req.body)
   // const  token  = req.headers.authorization
   //  const {token} = req.body
@@ -476,8 +476,8 @@ const getAnnouncementData = asyncHandler(async (req: Request, res: Response) => 
   // console.log(req.headers,'lllllllllll')
   // console.log(req.body)
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  const {token} = req.params
-  // const  token = req.headers.authorization
+  // const {token} = req.params
+  const  token = req.headers.authorization
   // const  token  = req.headers.authorization
   //  const {token} = req.body
   console.log(token, 'llll')
@@ -506,8 +506,8 @@ const getNavigationData = asyncHandler(async (req: Request, res: Response) => {
 
   // console.log(req.body)
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  const {token} = req.params
-  // const  token = req.headers.authorization
+  // const {token} = req.params
+  const  token = req.headers.authorization
   // const  token  = req.headers.authorization
   //  const {token} = req.body
   console.log(token, 'llll')
@@ -558,8 +558,8 @@ const getRemoQuickLinkData = asyncHandler(async (req: Request, res: Response) =>
 
   // console.log(req.body)
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  const {token} = req.params
-  // const  token = req.headers.authorization
+  // const {token} = req.params
+   const  token = req.headers.authorization
   // const  token  = req.headers.authorization
   //  const {token} = req.body
   console.log(token, 'llll')
@@ -608,8 +608,8 @@ const getRemoQuickLinkData = asyncHandler(async (req: Request, res: Response) =>
 
 const getCeoMsgData = asyncHandler(async (req: Request, res: Response) => {
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  const {token} = req.params
-  // const  token = req.headers.authorization
+  // const {token} = req.params
+  const  token = req.headers.authorization
   // console.log(req.body)
   // const  token  = req.headers.authorization
   //  const {token} = req.body
@@ -658,9 +658,9 @@ const getCeoMsgData = asyncHandler(async (req: Request, res: Response) => {
 const getNewsData = asyncHandler(async (req: Request, res: Response) => {
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
 
-  // const  token = req.headers.authorization
+   const  token = req.headers.authorization
   // console.log(req.body)
-  const { token } = req.params
+  // const { token } = req.params
   //  const {token} = req.body
   console.log(token, 'llll')
   // console.log(req.body,'gregrthtrht')
@@ -686,8 +686,8 @@ const getNewsData = asyncHandler(async (req: Request, res: Response) => {
 
 const getEmpData = asyncHandler(async (req: Request, res: Response) => {
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  const {token} = req.params
-  // const  token = req.headers.authorization
+  // const {token} = req.params
+   const  token = req.headers.authorization
   // console.log(req.body)
   // const  token = req.headers.authorization
   //  const {token} = req.body
@@ -726,9 +726,9 @@ const getEmpData = asyncHandler(async (req: Request, res: Response) => {
 const getHeroData = asyncHandler(async (req: Request, res: Response) => {
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
  
-  // const  token = req.headers.authorization
+   const  token = req.headers.authorization
   // console.log(req.body)
-  const { token } = req.params
+  // const { token } = req.params
   //  const {token} = req.body
   console.log(token, 'llll')
   // console.log(req.body,'gregrthtrht')
@@ -754,8 +754,8 @@ const getHeroData = asyncHandler(async (req: Request, res: Response) => {
 
 const getEventsMeetings = asyncHandler(async (req: Request, res: Response) => {
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  const {token} = req.params
-  // const  token = req.headers.authorization
+  // const {token} = req.params
+   const  token = req.headers.authorization
   // console.log(req.body)
   // const  token  = req.headers.authorization
   //  const {token} = req.body
@@ -795,8 +795,8 @@ const getEventsMeetings = asyncHandler(async (req: Request, res: Response) => {
 
 const getRemoNews = asyncHandler(async (req: Request, res: Response) => {
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  const {token} = req.params
-  // const  token = req.headers.authorization
+  // const {token} = req.params
+   const  token = req.headers.authorization
   // console.log(req.body)
   // const  token  = req.headers.authorization
   //  const {token} = req.body
@@ -849,8 +849,8 @@ const getRemoNews = asyncHandler(async (req: Request, res: Response) => {
 
 const getRemoHero = asyncHandler(async (req: Request, res: Response) => {
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  const {token} = req.params
-  // const  token = req.headers.authorization
+  // const {token} = req.params
+ const  token = req.headers.authorization
   // console.log(req.body)
   // const  token  = req.headers.authorization
   //  const {token} = req.body
@@ -895,8 +895,8 @@ const getRemoHero = asyncHandler(async (req: Request, res: Response) => {
 
 const getRemoContentEditorMaster = asyncHandler(async (req: Request, res: Response) => {
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  const {token} = req.params
-  // const  token = req.headers.authorization
+  // const {token} = req.params
+  const  token = req.headers.authorization
   // console.log(req.body)
   // const  token  = req.headers.authorization
   //  const {token} = req.body
@@ -941,8 +941,8 @@ const getRemoContentEditorMaster = asyncHandler(async (req: Request, res: Respon
 
 const getRemoEvents = asyncHandler(async (req: Request, res: Response) => {
   console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  const {token} = req.params
-  // const  token = req.headers.authorization
+  // const {token} = req.params
+   const  token = req.headers.authorization
   // console.log(req.body)
   // const  token  = req.headers.authorization
   //  const {token} = req.body
