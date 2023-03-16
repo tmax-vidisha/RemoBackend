@@ -333,9 +333,10 @@ exports.createToken = createToken;
 // console.log(AccessToken,'llllll'
 const getEventData = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers.authorization, 'tsfff');
+    const { token } = req.params;
     //  const  token = req.headers.authorization
     // console.log(req.body)
-    const token = req.headers.authorization;
+    // const  token  =req.headers.authorization
     //  const {token} = req.body
     console.log(token, 'llssdsdssdsdsdsdsll');
     // console.log(req.body,'gregrthtrht')
@@ -395,9 +396,10 @@ const getEventData = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0,
 exports.getEventData = getEventData;
 const getQuicklinkData = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
+    const { token } = req.params;
     //  const  token = req.headers.authorization
     // console.log(req.body)
-    const token = req.headers.authorization;
+    // const  token  = req.headers.authorization
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -417,9 +419,10 @@ const getQuicklinkData = (0, asyncHandler_1.default)((req, res) => __awaiter(voi
 exports.getQuicklinkData = getQuicklinkData;
 const getRecentFilesData = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
+    const { token } = req.params;
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const token = req.headers.authorization;
+    // const  token  = req.headers.authorization
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -441,8 +444,9 @@ const getAnnouncementData = (0, asyncHandler_1.default)((req, res) => __awaiter(
     // console.log(req.headers,'lllllllllll')
     // console.log(req.body)
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
+    const { token } = req.params;
     // const  token = req.headers.authorization
-    const token = req.headers.authorization;
+    // const  token  = req.headers.authorization
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -463,8 +467,9 @@ exports.getAnnouncementData = getAnnouncementData;
 const getNavigationData = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // console.log(req.body)
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
+    const { token } = req.params;
     // const  token = req.headers.authorization
-    const token = req.headers.authorization;
+    // const  token  = req.headers.authorization
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -501,8 +506,9 @@ exports.getNavigationData = getNavigationData;
 const getRemoQuickLinkData = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // console.log(req.body)
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
+    const { token } = req.params;
     // const  token = req.headers.authorization
-    const token = req.headers.authorization;
+    // const  token  = req.headers.authorization
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -538,9 +544,10 @@ const getRemoQuickLinkData = (0, asyncHandler_1.default)((req, res) => __awaiter
 exports.getRemoQuickLinkData = getRemoQuickLinkData;
 const getCeoMsgData = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
+    const { token } = req.params;
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const token = req.headers.authorization;
+    // const  token  = req.headers.authorization
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -598,9 +605,10 @@ const getNewsData = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, 
 exports.getNewsData = getNewsData;
 const getEmpData = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
+    const { token } = req.params;
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const token = req.headers.authorization;
+    // const  token = req.headers.authorization
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -652,9 +660,10 @@ const getHeroData = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, 
 exports.getHeroData = getHeroData;
 const getEventsMeetings = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
+    const { token } = req.params;
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const token = req.headers.authorization;
+    // const  token  = req.headers.authorization
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -685,9 +694,10 @@ const getEventsMeetings = (0, asyncHandler_1.default)((req, res) => __awaiter(vo
 exports.getEventsMeetings = getEventsMeetings;
 const getRemoNews = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
+    const { token } = req.params;
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const token = req.headers.authorization;
+    // const  token  = req.headers.authorization
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -725,9 +735,10 @@ const getRemoNews = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, 
 exports.getRemoNews = getRemoNews;
 const getRemoHero = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
+    const { token } = req.params;
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const token = req.headers.authorization;
+    // const  token  = req.headers.authorization
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -759,9 +770,10 @@ const getRemoHero = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, 
 exports.getRemoHero = getRemoHero;
 const getRemoContentEditorMaster = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
+    const { token } = req.params;
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const token = req.headers.authorization;
+    // const  token  = req.headers.authorization
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
@@ -793,9 +805,10 @@ const getRemoContentEditorMaster = (0, asyncHandler_1.default)((req, res) => __a
 exports.getRemoContentEditorMaster = getRemoContentEditorMaster;
 const getRemoEvents = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy');
+    const { token } = req.params;
     // const  token = req.headers.authorization
     // console.log(req.body)
-    const token = req.headers.authorization;
+    // const  token  = req.headers.authorization
     //  const {token} = req.body
     console.log(token, 'llll');
     // console.log(req.body,'gregrthtrht')
