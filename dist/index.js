@@ -42,22 +42,26 @@ app.use(body_parser_1.default.urlencoded({ limit: "50mb", extended: true, parame
 // app.use(express.static("files"));
 // app.use(express.urlencoded({limit: '25mb', extended: true}));
 // app.use(bodyParser.json({ limit: "50mb" }))
-var whitelist = ['https://red-moss-0dcddaf10.2.azurestaticapps.net', 'https://red-moss-0dcddaf10.2.azurestaticapps.net']; //white list consumers
-var corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true);
-        }
-        else {
-            callback(null, false);
-        }
-    },
-    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
-    optionsSuccessStatus: 200,
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
-};
-// app.use(cors(corsOptions));
+// var whitelist = ['https://red-moss-0dcddaf10.2.azurestaticapps.net', 'https://red-moss-0dcddaf10.2.azurestaticapps.net']; //white list consumers
+// var corsOptions = {
+//   origin: function (origin:any, callback:any) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(null, false);
+//     }
+//   },
+//   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+//   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+//   credentials: true, //Credentials are cookies, authorization headers or TLS client certificates.
+//   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
+// };
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+    next();
+});
+app.use((0, cors_1.default)());
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
 //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -1413,11 +1417,11 @@ function uploadFiles(req, res) {
     res.json({ message: "Successfully uploaded files" });
 }
 console.log("Remo");
-app.use('/api/v1/token', (0, cors_1.default)(corsOptions), token_1.default);
-app.use(`/api/v1/lists`, (0, cors_1.default)(corsOptions), graph_1.default);
-app.use(`/api/v1/sites`, (0, cors_1.default)(corsOptions), workspace_1.default);
-app.use(`/api/v1/onedrive`, (0, cors_1.default)(corsOptions), onedrive_1.default);
-app.use(`/api/v1/header`, (0, cors_1.default)(corsOptions), header_1.default);
+app.use('/api/v1/token', token_1.default);
+app.use(`/api/v1/lists`, graph_1.default);
+app.use(`/api/v1/sites`, workspace_1.default);
+app.use(`/api/v1/onedrive`, onedrive_1.default);
+app.use(`/api/v1/header`, header_1.default);
 // app.use(`/api/v1/contentEditor`,announcement,herobanner,ceo,employee,news,events)
 app.use(`/api/v1/contentEditor`, announcement_1.default, herobannner_1.default, ceo_1.default, emphighlight_1.default, news_1.default, events_1.default, navigation_1.default, contenteditor_1.default, quicklinks_1.default, gallery_1.default);
 app.use(`/api/v1/gallery`, photosandvideo_1.default);

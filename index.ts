@@ -43,22 +43,27 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 5
 // app.use(express.static("files"));
 // app.use(express.urlencoded({limit: '25mb', extended: true}));
 // app.use(bodyParser.json({ limit: "50mb" }))
-var whitelist = ['https://red-moss-0dcddaf10.2.azurestaticapps.net', 'https://red-moss-0dcddaf10.2.azurestaticapps.net']; //white list consumers
-var corsOptions = {
-  origin: function (origin:any, callback:any) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(null, false);
-    }
-  },
-  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-  credentials: true, //Credentials are cookies, authorization headers or TLS client certificates.
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
-};
+// var whitelist = ['https://red-moss-0dcddaf10.2.azurestaticapps.net', 'https://red-moss-0dcddaf10.2.azurestaticapps.net']; //white list consumers
+// var corsOptions = {
+//   origin: function (origin:any, callback:any) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(null, false);
+//     }
+//   },
+//   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+//   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+//   credentials: true, //Credentials are cookies, authorization headers or TLS client certificates.
+//   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
+// };
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', '*');
 
-// app.use(cors(corsOptions));
+  next();
+});
+app.use(cors());
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
 //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -1574,11 +1579,11 @@ function uploadFiles(req:any, res:any) {
 
 console.log("Remo")
 
-app.use('/api/v1/token',cors(corsOptions),token)
-app.use(`/api/v1/lists`,cors(corsOptions),graph)
-app.use(`/api/v1/sites`,cors(corsOptions),workspace)
-app.use(`/api/v1/onedrive`,cors(corsOptions),onedrive)
-app.use(`/api/v1/header`,cors(corsOptions),header)
+app.use('/api/v1/token',token)
+app.use(`/api/v1/lists`,graph)
+app.use(`/api/v1/sites`,workspace)
+app.use(`/api/v1/onedrive`,onedrive)
+app.use(`/api/v1/header`,header)
 
 // app.use(`/api/v1/contentEditor`,announcement,herobanner,ceo,employee,news,events)
 
