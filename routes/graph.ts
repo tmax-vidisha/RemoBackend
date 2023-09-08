@@ -4,6 +4,7 @@ import { getPostData,
          postEventData,
          postHeroData,
          postCeoData,
+         postDepartmentListData,
          postNewsData,
          postEmpData,
          postUserQuicklinkData,
@@ -12,7 +13,8 @@ import { getPostData,
          RemEmpHighlightItemId,
          postRemoEventData,
          getRemoEventData,
-         getRemoEventDataLanding
+         getRemoEventDataLanding,
+         postRemoUserQuicklinkData
         } from  "../controllers/postdata";
 
 // const { getData } = require("../controllers/graph");
@@ -47,6 +49,7 @@ router.route('/data').post(getPostData)
 router.route('/eventdata').post(postRemoEventData)
 router.route('/herodata').post(postHeroData)
 router.route('/ceodata').post(postCeoData)
+router.route('/departmentListdata').post(postDepartmentListData)
 router.route('/newsdata').post(postRemoNews)
 router.route('/eventdataOne').post(getRemoEventData)
 router.route('/eventdataLanding').post(getRemoEventDataLanding)
@@ -56,5 +59,5 @@ router.route('/empdata').post(postRemEmpHighlight)
 
 router.route('/empItemdata').post(RemEmpHighlightItemId)
 router.route('/userquicklinkdata').post(postUserQuicklinkData)
-
+router.route('/userRemoquicklinkdata').post(postRemoUserQuicklinkData)
 export default router;

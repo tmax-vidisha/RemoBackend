@@ -4,12 +4,12 @@ import azure from 'azure-storage';
 require('dotenv').config();
 import fetch from 'node-fetch'
 import asyncHandler from './../../middleware/asyncHandler'
-const AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=remoblobstorage;AccountKey=2dyNCBrGp/3St5coni+Xca3mFbQA67byG6qnp81UjypSK65msMG461kPruQ/Vr0EaZS0qk9y7dxewDnnb3kcxQ==;EndpointSuffix=core.windows.net"
+
 
 
 function blobStorage(image: any, imageName: any) {
     //@ts-ignore
-    var blobService = azure.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
+    var blobService = azure.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
     var matches = image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
     if(matches !== null){
     var type = matches[1];

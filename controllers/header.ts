@@ -201,7 +201,7 @@ const getMeetingsUnCount = asyncHandler(async (req: Request, res: Response) => {
         }
 
       })
-    console.log(response.data, "UnCountMeetings")
+    // console.log(response.data, "UnCountMeetings")
     res.status(200).json({
       success: true,
       response: response.data.value
@@ -241,7 +241,7 @@ const getUserInfo = asyncHandler(async (req: Request, res: Response) => {
         }
 
       })
-    console.log(response.data, "UncountEmails")
+    // console.log(response.data, "UncountEmails")
     res.status(200).json({
       success: true,
       response: response.data

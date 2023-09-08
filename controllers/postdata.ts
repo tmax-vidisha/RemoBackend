@@ -4,13 +4,15 @@ import express, { Request, Response } from "express";
 import fetch from 'node-fetch'
 import asyncHandler from '../middleware/asyncHandler'
 const Ceo_Message = "b8771df7-e108-41c0-ab73-5f84ac930d24"
+const Department_Master = "e3d3ceb0-5e66-49ea-92c7-e1eb83cdb7c0"
 const AnnouncementId = "1b883bd5-98ef-4a8c-8390-ee42ffa431f9"
 const News_Id = "72988e1e-2ebf-48dc-96ce-2db3cbb7c3e3"
 const EmpHighlights = "14f67e9e-4581-4a06-8c29-f775b8770fe4"
 const NewQuickLinkUser = 'b8e303de-b928-4f6a-97dd-4523583fa25d'
 const BASE_PATH = `https://graph.microsoft.com/v1.0/sites`;
 const REMO_SITE_ID = "tmxin.sharepoint.com,1649e6fd-df59-4f03-8e4b-4d765864f406,d2634703-c0cd-42f6-bfb5-c60555dbcb7d"
-const Events_Id = "80d2331e-6970-4fe2-aa79-c6cae73bc150"
+const Events_Id = "80d2331e-6970-4fe2-aa79-c6cae73bc150";
+const Policy_Id = "01DH6IWZ33RN4VTWZ2QVGKEWTMWOLSCVPJ";
 const HeroImage_Id = "7dfccbdf-0469-40e8-ab99-501d6314491f"
 const Site_Id = 'tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43'
 const RemoNews_Id = "25fb939d-87e0-4fb5-b575-f11bd916e4df"
@@ -19,14 +21,14 @@ const RemoEvent_Id = "b74c9809-11b3-487e-b432-cca12365b8ea"
 import moment from 'moment';
 import azure from 'azure-storage';
 require('dotenv').config();
-const AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=remoblobstorage;AccountKey=2dyNCBrGp/3St5coni+Xca3mFbQA67byG6qnp81UjypSK65msMG461kPruQ/Vr0EaZS0qk9y7dxewDnnb3kcxQ==;EndpointSuffix=core.windows.net"
+
 const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json({ limit: "50mb" }))
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 
 
-console.log(AZURE_STORAGE_CONNECTION_STRING, 'hyjyjyjyjyjyjyj')
+//console.log(process.env.AZURE_STORAGE_CONNECTION_STRING, 'hyjyjyjyjyjyjyj')
 const createPostRequset = async (url: any, token: any, title: any, desc: any) => {
 
 
@@ -131,7 +133,7 @@ const createPostRequsetHero = async (url: any, token: any, title: any, pic: any,
   // console.log(pic,'tey54u6565ieutudrusya')
   // console.log(title,'gregrthtrht')
   //@ts-ignore
-  var blobService = azure.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
+  var blobService = azure.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
   var matches = pic.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
   var type = matches[1];
   //@ts-ignore
@@ -158,7 +160,7 @@ const createPostRequsetHero = async (url: any, token: any, title: any, pic: any,
       Expiry: expiryDate
     }
   };
-  console.log(sharedAccessPolicy, 'iiii')
+ // console.log(sharedAccessPolicy, 'iiii')
   //@ts-ignore
   var sasToken = blobService.generateSharedAccessSignature(containerName, blobName, sharedAccessPolicy);
   var response = {};
@@ -203,7 +205,7 @@ const createPostRequsetCeo = async (url: any, token: any, title: any, desc: any,
   // console.log(username,'tey54u6565ieutudrusya')
   // console.log(position,'gregrthtrht')
   //@ts-ignore
-  var blobService = azure.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
+  var blobService = azure.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
   var matches = pic.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
   var type = matches[1];
   //@ts-ignore
@@ -237,7 +239,7 @@ const createPostRequsetCeo = async (url: any, token: any, title: any, desc: any,
   //@ts-ignore
   response.image = blobService.getUrl(containerName, blobName, sasToken);
   //@ts-ignore
-  console.log(response.image)
+ // console.log(response.image)
 
 
   const Data = {
@@ -279,7 +281,7 @@ const createPostRequsetNews = async (url: any, token: any, title: any, desc: any
   // console.log(username,'tey54u6565ieutudrusya')
   // console.log(position,'gregrthtrht')
   //@ts-ignore
-  var blobService = azure.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
+  var blobService = azure.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
   var matches = pic.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
   var type = matches[1];
   //@ts-ignore
@@ -355,7 +357,7 @@ const createPostRequsetEmp = async (url: any, token: any, title: any, name: any,
   // console.log(dept,'tey54u6565ieutudrusya')
   // console.log(position,'gregrthtrht')
   //@ts-ignore
-  var blobService = azure.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
+  var blobService = azure.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
   var matches = pic.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
   var type = matches[1];
   //@ts-ignore
@@ -382,7 +384,7 @@ const createPostRequsetEmp = async (url: any, token: any, title: any, name: any,
       Expiry: expiryDate
     }
   };
-  console.log(sharedAccessPolicy, 'iiii')
+  //console.log(sharedAccessPolicy, 'iiii')
   //@ts-ignore
   var sasToken = blobService.generateSharedAccessSignature(containerName, blobName, sharedAccessPolicy);
   var response = {};
@@ -423,10 +425,10 @@ const createPostRequsetEmp = async (url: any, token: any, title: any, name: any,
 }
 
 const createPostRequsetUserQuickLink = async (url: any, token: any, user: any, globalId: any) => {
-  console.log(url, '6u6iu67iuiuiti')
+ // console.log(url, '6u6iu67iuiuiti')
   // console.log(token,'thtyjytjyjyjyj')
-  console.log(user, '6u6iu67iuiuiti')
-  console.log(globalId, 'rgtreyrewyreyweywsF')
+ // console.log(user, '6u6iu67iuiuiti')
+ // console.log(globalId, 'rgtreyrewyreyweywsF')
   // console.log(pic,'tey54u6565ieutudrusya')
   // console.log(title,'gregrthtrht')
   // console.log(dept,'tey54u6565ieutudrusya')
@@ -533,7 +535,7 @@ const getPostData = asyncHandler(async (req: Request, res: Response) => {
 
   // console.log(req.body)
   // const {accessToken} = req.headers.authorization
-  console.log(req.headers.authorization, 'tttttttvvvvvtttttttyy')
+  //console.log(req.headers.authorization, 'tttttttvvvvvtttttttyy')
   const token = req.headers.authorization
   //  var d = JSON.parse(req.headers.authorization)
   //  console.log(d,'juuju')
@@ -668,16 +670,16 @@ const postEventData = asyncHandler(async (req: Request, res: Response) => {
 
   // console.log(req.body)
   // const {token} = req.params
-  console.log(req.headers.authorization, 'tttddddttttvvvvvtttttttyy')
-  const token = req.headers.authorization
+  //console.log(req.headers.authorization, 'tttddddttttvvvvvtttttttyy')
+  const token = req.headers.authorization;
   const {
     // token,
     eventtitle, eventdesc, eventdate, enddate } = req.body
   // console.log(token,'llll')
-  console.log(eventtitle, 'ytjytjytjty')
-  console.log(eventdesc, 'thgtrhj67k87k87k87k87')
-  console.log(eventdate, 'thgtrhj67k87k87k87k87')
-  console.log(enddate, 'rgtreyrewyreyweywsF')
+  //console.log(eventtitle, 'ytjytjytjty')
+  //console.log(eventdesc, 'thgtrhj67k87k87k87k87')
+ // console.log(eventdate, 'thgtrhj67k87k87k87k87')
+ // console.log(enddate, 'rgtreyrewyreyweywsF')
   // console.log(empname,'tey54u6565ieutudrusya')
   // console.log(empdept,'gregrthtrht')
   // console.log(emppicname,'gregrthtrht')
@@ -711,12 +713,59 @@ const postEventData = asyncHandler(async (req: Request, res: Response) => {
   }
 
 })
+const postPolicyData = asyncHandler(async (req: Request, res: Response) => {
+
+  // console.log(req.body)
+  // const {token} = req.params
+  console.log(req.headers.authorization, 'policy')
+  const token = req.headers.authorization
+  const {
+    // token,title,
+    policyname,
+    policymodified,
+    policymodifiedBy,
+    } = req.body
+  // console.log(token,'llll');
+  console.log( policyname,'policy Name');
+  console.log( policymodified, 'policy Modified');
+  console.log(policymodifiedBy, 'policy Modified by');
+  if (!token) {
+    // const dataFiles = await createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Events_Id}/items?$expand=fields`, token )
+    // console.log(dataFiles,'dgdfgthtrhytjytjyt')
+    // return res.status(200).json({
+    //     success: true,
+    //     data: dataFiles
+    // });
+    //  res.send(dataFiles)
+    return res.status(404).json({
+      success: false,
+      error: "No Token found"
+    });
+
+  } else {
+
+    // if(token && eventtitle && eventdesc && enddate ){
+    //const Policy = await createPostRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Policy_Id}/items`, token, policymodified, policymodifiedBy)
+    const Policy = await createPostRequset(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/drives/b!cIcBOTQ170ygV3hcQ7aiAKUmwUfuMwpCqErIQwo2ikPU-UPjxittT53b2Hcjy4dk/root/children`, token, policymodified, policymodifiedBy)
+    console.log(Policy, 'Policy')
+    res.status(200).json({
+      // success: true,
+      Policy
+
+    });
+
+
+    // }
+
+  }
+
+})
 
 const postHeroData = asyncHandler(async (req: Request, res: Response) => {
 
   // console.log(req.body)
   // const {token} = req.params
-  console.log(req.headers.authorization, 'tccccttddddttttvvvvvtttttttyy')
+ // console.log(req.headers.authorization, 'tccccttddddttttvvvvvtttttttyy')
   const token = req.headers.authorization
   const {
     // token,
@@ -727,9 +776,9 @@ const postHeroData = asyncHandler(async (req: Request, res: Response) => {
     //  employyetitle, empname,empdept,emppic,emppicname,
     //  userquicklink,globalquicklink
   } = req.body
-  console.log(token, 'llll')
-  console.log(herotitle, 'ytjytjytjty')
-  console.log(picname, 'thgtrhj67k87k87k87k87')
+  //console.log(token, 'llll')
+ // console.log(herotitle, 'ytjytjytjty')
+  //console.log(picname, 'thgtrhj67k87k87k87k87')
   // console.log(userquicklink,'thgtrhj67k87k87k87k87')
   //  console.log(globalquicklink,'rgtreyrewyreyweywsF')
   // console.log(empname,'tey54u6565ieutudrusya')
@@ -771,14 +820,14 @@ const postCeoData = asyncHandler(async (req: Request, res: Response) => {
 
   // console.log(req.body)
   // const {token} = req.params
-  console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
+  //console.log(req.headers.authorization, 'post ceo data')
   const token = req.headers.authorization
   const {
     // token,
     ceotitle, ceodesc, ceousername, ceoposition, ceopic, ceopicname,
 
   } = req.body
-  console.log(token, 'llll')
+  //console.log(token, 'llll')
   // console.log(title,'ytjytjytjty')
   // console.log(desc,'thgtrhj67k87k87k87k87')
   // console.log(userquicklink,'thgtrhj67k87k87k87k87')
@@ -805,10 +854,64 @@ const postCeoData = asyncHandler(async (req: Request, res: Response) => {
 
     // if( token && ceotitle && ceodesc && ceousername && ceoposition && ceopic && ceopicname){
     const Ceo = await createPostRequsetCeo(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Ceo_Message}/items`, token, ceotitle, ceodesc, ceousername, ceoposition, ceopic, ceopicname)
-    console.log(Ceo, 'h7kvxvzx8dgfgfdghth7k87')
+    //console.log(Ceo, 'h7kvxvzx8dgfgfdghth7k87')
     res.status(200).json({
       // success: true,
       Ceo
+
+    });
+
+
+    // }
+
+
+
+
+  }
+
+})
+const postDepartmentListData = asyncHandler(async (req: Request, res: Response) => {
+
+  // console.log(req.body)
+  // const {token} = req.params
+  console.log(req.headers.authorization, 'post Department list data')
+  const token = req.headers.authorization
+  const {
+   
+    departmentName, departmentImage, isActive, isDraft, path, orderNo,
+
+  } = req.body
+  console.log(token, 'department body ')
+  console.log(departmentName,'department Name')
+  // console.log(desc,'thgtrhj67k87k87k87k87')
+  // console.log(userquicklink,'thgtrhj67k87k87k87k87')
+  //  console.log(globalquicklink,'rgtreyrewyreyweywsF')
+  // console.log(empname,'tey54u6565ieutudrusya')
+  // console.log(empdept,'gregrthtrht')
+  // console.log(emppicname,'gregrthtrht')
+  if (!token) {
+    // const dataFiles = await createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Events_Id}/items?$expand=fields`, token )
+    // console.log(dataFiles,'dgdfgthtrhytjytjyt')
+    // return res.status(200).json({
+    //     success: true,
+    //     data: dataFiles
+    // });
+    //  res.send(dataFiles)
+    return res.status(404).json({
+      success: false,
+      error: "No Token found"
+    });
+
+  } else {
+
+
+
+    // if( token && ceotitle && ceodesc && ceousername && ceoposition && ceopic && ceopicname){
+    const DepartmentMaster = await createPostRequsetCeo(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/e3d3ceb0-5e66-49ea-92c7-e1eb83cdb7c0/items?$expand=fields&$filter=fields/isActive eq 1`, token,  departmentName, departmentImage, isActive, isDraft, path, orderNo,)
+    console.log(DepartmentMaster, 'department master')
+    res.status(200).json({
+      // success: true,
+      DepartmentMaster
 
     });
 
@@ -826,7 +929,7 @@ const postNewsData = asyncHandler(async (req: Request, res: Response) => {
 
   // console.log(req.body)
   // const {token} = req.params
-  console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
+  //console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
   const token = req.headers.authorization
   const {
     // token,
@@ -864,7 +967,7 @@ const postNewsData = asyncHandler(async (req: Request, res: Response) => {
 
     // if(token && newstitle && newsdesc && newspic && newspicname){
     const News = await createPostRequsetNews(`${BASE_PATH}/${REMO_SITE_ID}/lists/${News_Id}/items`, token, newstitle, newsdesc, newspic, newspicname)
-    console.log(News, 'tjyjytjytjytjytjytjyj')
+   // console.log(News, 'tjyjytjytjytjytjytjyj')
     res.status(200).json({
       // success: true,
       News
@@ -881,7 +984,7 @@ const postEmpData = asyncHandler(async (req: Request, res: Response) => {
 
   // console.log(req.body)
   // const {token} = req.params
-  console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
+  //console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
   const token = req.headers.authorization
   const {
     // token,
@@ -917,7 +1020,7 @@ const postEmpData = asyncHandler(async (req: Request, res: Response) => {
 
     // if(token && employyetitle && empname && empdept && emppic && emppicname){
     const Employee = await createPostRequsetEmp(`${BASE_PATH}/${REMO_SITE_ID}/lists/${EmpHighlights}/items`, token, employyetitle, empname, empdept, emppic, emppicname)
-    console.log(Employee, 'tththtrhtrhyjyjyj')
+   // console.log(Employee, 'tththtrhtrhyjyjyj')
     res.status(200).json({
       // success: true,
       Employee
@@ -934,7 +1037,7 @@ const postUserQuicklinkData = asyncHandler(async (req: Request, res: Response) =
 
   // console.log(req.body)
   // const {token} = req.params
-  console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
+  //console.log(req.headers.authorization, 'user quick links')
   const token = req.headers.authorization
   const {
     // token,
@@ -1001,7 +1104,7 @@ const postUserQuicklinkData = asyncHandler(async (req: Request, res: Response) =
 
 function blobStorage(image: any, imageName: any) {
   //@ts-ignore
-  var blobService = azure.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
+  var blobService = azure.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
   var matches = image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
   var type = matches[1];
   //@ts-ignore
@@ -1035,7 +1138,7 @@ function blobStorage(image: any, imageName: any) {
   //@ts-ignore
   response.image = blobService.getUrl(containerName, blobName, sasToken);
   //@ts-ignore
-  console.log(response.image)
+ // console.log(response.image)
 
   //@ts-ignore
   return response.image
@@ -1045,7 +1148,7 @@ const postRemoNews = asyncHandler(async (req: Request, res: Response) => {
 
   // console.log(req.body)
   // const {token} = req.params
-  console.log(req.headers.authorization, 'tccccttddddttttvvvvvtttttttyy')
+  //console.log(req.headers.authorization, 'tccccttddddttttvvvvvtttttttyy')
   const token = req.headers.authorization
   const {
     //   // token,
@@ -1056,8 +1159,8 @@ const postRemoNews = asyncHandler(async (req: Request, res: Response) => {
     //   //  employyetitle, empname,empdept,emppic,emppicname,
     //   //  userquicklink,globalquicklink
   } = req.body
-  console.log(newstitle, 'isActive')
-  console.log(newsdesc, 'EnableLikes')
+  //console.log(newstitle, 'isActive')
+  //console.log(newsdesc, 'EnableLikes')
   // console.log(newspic, 'EnableCommands')
   // console.log(newspicname, 'SharedAsEmail')
   const Image = blobStorage(newspic, newspicname)
@@ -1108,7 +1211,7 @@ const postRemoNews = asyncHandler(async (req: Request, res: Response) => {
       });
       const data = await response.json();
       // enter you logic when the fetch is successful
-      console.log(data, 'rtyyw444444444');
+     // console.log(data, 'rtyyw444444444');
       // return data
     } catch (error) {
       // enter your logic for when there is an error (ex. error toast)
@@ -1137,7 +1240,6 @@ const postRemoNews = asyncHandler(async (req: Request, res: Response) => {
 
 })
 
-
 const postRemEmpHighlight = asyncHandler(async (req: Request, res: Response) => {
 
   // console.log(req.body)
@@ -1153,11 +1255,11 @@ const postRemEmpHighlight = asyncHandler(async (req: Request, res: Response) => 
     employyetitle, empname, empdept, emppic, emppicname,
     //   //  userquicklink,globalquicklink
   } = req.body
-  console.log(employyetitle, 'isActive')
-  console.log(empname, 'EnableLikes')
-  console.log(empdept, 'EnableLikes')
-  console.log(emppic, 'pic')
-  console.log(emppicname, 'yryrtyrtyrt')
+ // console.log(employyetitle, 'isActive')
+//  console.log(empname, 'EnableLikes')
+//  console.log(empdept, 'EnableLikes')
+ // console.log(emppic, 'pic')
+ // console.log(emppicname, 'yryrtyrtyrt')
   // console.log(newspic, 'EnableCommands')
   // console.log(newspicname, 'SharedAsEmail')
   const Image = blobStorage(emppic, emppicname)
@@ -1192,8 +1294,6 @@ const postRemEmpHighlight = asyncHandler(async (req: Request, res: Response) => 
         Dept: empdept,
         EmpImg: Image
 
-
-
         //@ts-ignore
         // heroUrl: response.image
       }
@@ -1209,7 +1309,7 @@ const postRemEmpHighlight = asyncHandler(async (req: Request, res: Response) => 
       });
       const data = await response.json();
       // enter you logic when the fetch is successful
-      console.log(data, 'rtyyw444444444');
+     // console.log(data, 'rtyyw444444444');
       // return data
     } catch (error) {
       // enter your logic for when there is an error (ex. error toast)
@@ -1228,7 +1328,7 @@ const RemEmpHighlightItemId = asyncHandler(async (req: Request, res: Response) =
 
   // console.log(req.body)
   // const {token} = req.params
-  console.log(req.headers.authorization, 'tccccttddddttttvvvvvtttttttyy')
+//  console.log(req.headers.authorization, 'tccccttddddttttvvvvvtttttttyy')
   const token = req.headers.authorization
   const {
     //   // token,
@@ -1280,7 +1380,7 @@ const RemEmpHighlightItemId = asyncHandler(async (req: Request, res: Response) =
 
         })
       const data = await response.data
-      console.log(data, 'kky')
+     // console.log(data, 'kky')
       res.status(200).json({
         success: true,
         response: data
@@ -1305,10 +1405,10 @@ const postRemoEventData = asyncHandler(async (req: Request, res: Response) => {
     // token,
     eventtitle, eventdesc, eventdate, enddate } = req.body
   // console.log(token,'llll')
-  console.log(eventtitle, 'ytjytjytjty')
-  console.log(eventdesc, 'thgtrhj67k87k87k87k87')
-  console.log(eventdate, 'thgtrhj67k87k87k87k87')
-  console.log(enddate, 'rgtreyrewyreyweywsF')
+ // console.log(eventtitle, 'ytjytjytjty')
+ // console.log(eventdesc, 'thgtrhj67k87k87k87k87')
+//console.log(eventdate, 'thgtrhj67k87k87k87k87')
+ //nddate, 'rgtreyrewyreyweywsF')
   // console.log(empname,'tey54u6565ieutudrusya')
   // console.log(empdept,'gregrthtrht')
   // console.log(emppicname,'gregrthtrht')
@@ -1329,7 +1429,7 @@ const postRemoEventData = asyncHandler(async (req: Request, res: Response) => {
 
     // if(token && eventtitle && eventdesc && enddate ){
     const Event = await createPostRequsetEvent(`${BASE_PATH}/${Site_Id}/lists/${RemoEvent_Id}/items`, token, eventtitle, eventdesc, eventdate, enddate)
-    console.log(Event, 'hyjgrgrehtrhtrh8k87kvxvzx87k87')
+    //console.log(Event, 'hyjgrgrehtrhtrh8k87kvxvzx87k87')
     res.status(200).json({
       // success: true,
       Event
@@ -1347,7 +1447,7 @@ const getRemoEventData = asyncHandler(async (req: Request, res: Response) => {
   // console.log(req.body)
   // const {token} = req.params
 
-  console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
+ // console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
   const token = req.headers.authorization
   const {  Date } = req.body
   //  console.log(Date, 'treytrutusc')
@@ -1359,7 +1459,7 @@ const getRemoEventData = asyncHandler(async (req: Request, res: Response) => {
 // let yourdate = '2021-01-02T07:57:45.121Z';
 
 var responseDate = moment(Date).format('YYYY-MM-DD');
-console.log(responseDate)
+//console.log(responseDate)
   if (!token) {
 
     return res.status(404).json({
@@ -1412,7 +1512,7 @@ const getRemoEventDataLanding = asyncHandler(async (req: Request, res: Response)
   // console.log(req.body)
   // const {token} = req.params
 
-  console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
+ // console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
   const token = req.headers.authorization
   const {  Date } = req.body
   //  console.log(Date, 'treytrutusc')
@@ -1424,7 +1524,7 @@ const getRemoEventDataLanding = asyncHandler(async (req: Request, res: Response)
 // let yourdate = '2021-01-02T07:57:45.121Z';
 
 var responseDate = moment(Date).format('YYYY-MM-DD');
-console.log(responseDate)
+//console.log(responseDate)
   if (!token) {
 
     return res.status(404).json({
@@ -1462,6 +1562,121 @@ console.log(responseDate)
 
 })
 
+async function checked(token: any) {
+  const res = await axios.get(`https://graph.microsoft.com/v1.0/me`, {
+    headers: {
+      'Authorization': `Bearer ${token} `,
+      'Content-Type': 'application/json',
+
+
+    }
+
+  })
+   return res.data.mail
+  
+}
+
+const postRemoUserQuicklinkData = asyncHandler(async (req: Request, res: Response) => {
+
+  // console.log(req.body)
+  // const {token} = req.params
+  //console.log(req.headers.authorization, 'tssccccttddddttttvvvvvtttttttyy')
+  const token = req.headers.authorization
+  const {
+    title, Ids
+    // token,
+    // title,desc,
+    // eventtitle,eventdesc, 
+    //  eventdate,enddate,herotitle, heropic,
+    //  picname,ceotitle,ceodesc,ceousername,
+    //  ceoposition,ceopic,ceopicname,
+    //  newstitle,newsdesc,newspic,newspicname,
+    //  employyetitle, empname,empdept,emppic,emppicname,
+    // userquicklink, globalquicklink
+  } = req.body
+  // console.log(token,'llll')
+   //console.log(title,'ytjytjytjty')
+   //console.log(Ids,'thgtrhj67k87k87k87k87')
+  // console.log(userquicklink,'thgtrhj67k87k87k87k87')
+  //  console.log(globalquicklink,'rgtreyrewyreyweywsF')
+  // console.log(empname,'tey54u6565ieutudrusya')
+  // console.log(empdept,'gregrthtrht')
+  // console.log(emppicname,'gregrthtrht')
+  if (!token) {
+    // const dataFiles = await createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Events_Id}/items?$expand=fields`, token )
+    // console.log(dataFiles,'dgdfgthtrhytjytjyt')
+    // return res.status(200).json({
+    //     success: true,
+    //     data: dataFiles
+    // });
+    //  res.send(dataFiles)
+    return res.status(404).json({
+      success: false,
+      error: "No Token found"
+    });
+
+  } else {
+    // console.log('hrthrthhrh')
+     const ans = await checked(token)
+  
+    // console.log(ans,'gregrthtrht')
+     const Data = {
+      fields: {
+        Title: ans,
+        // Url: 'tgrgsg',
+        // UserEmail: 'fsdfsdfsdfsdfdsf',
+        'GlobalQuickLinksLookupId@odata.type': "Collection(Edm.Int32)",
+        GlobalQuickLinksLookupId: Ids
+
+
+        //@ts-ignore
+        // heroUrl: response.image
+      }
+    }
+    try {
+      const response = await fetch(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/d438556e-ff96-47cc-803d-c14ffb9c4d2a/items`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(Data)
+      });
+      const data = await response.json();
+      // enter you logic when the fetch is successful
+     // console.log(data);
+      return res.status(201).json({
+        success: true,
+        response:"List Item created"
+      });
+      // return data
+    } catch (error) {
+      // enter your logic for when there is an error (ex. error toast)
+
+      console.log(error)
+      return res.status(500).json({
+        success: false,
+        // error: error,
+        response:'List Item Creation Failed'
+      });
+    }
+
+
+    // if( token && userquicklink && globalquicklink){
+    // const UserQuickLink = await createPostRequsetUserQuickLink(`${BASE_PATH}/${REMO_SITE_ID}/lists/${NewQuickLinkUser}/items`, token, userquicklink, globalquicklink)
+    // console.log(UserQuickLink, 'ttryjyju7k76k76k')
+    // res.status(200).json({
+    //   // success: true,
+    //   UserQuickLink
+
+    // });
+
+   
+  }
+
+})
+
+
 
 export {
   // getData,
@@ -1471,6 +1686,7 @@ export {
   postEventData,
   postHeroData,
   postCeoData,
+  postDepartmentListData,
   postNewsData,
   postEmpData,
   postUserQuicklinkData,
@@ -1479,5 +1695,7 @@ export {
   RemEmpHighlightItemId,
   postRemoEventData,
   getRemoEventData,
-  getRemoEventDataLanding
+  getRemoEventDataLanding,
+  postRemoUserQuicklinkData,
+  postPolicyData,
 }

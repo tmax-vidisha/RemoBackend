@@ -1,33 +1,35 @@
-import axios from 'axios'
+import axios from "axios";
 import express, { Request, Response } from "express";
 // const StatusCodes = require ("http-status-codes");
 // const { BlobServiceClient } = require('@azure/storage-blob');
-import azure from 'azure-storage';
-import moment from 'moment';
-require('dotenv').config();
+import azure from "azure-storage";
+import moment from "moment";
+require("dotenv").config();
 
 const BASE_PATH = `https://graph.microsoft.com/v1.0/sites`;
-const REMO_SITE_ID = "tmxin.sharepoint.com,1649e6fd-df59-4f03-8e4b-4d765864f406,d2634703-c0cd-42f6-bfb5-c60555dbcb7d"
-const AnnouncementId = "1b883bd5-98ef-4a8c-8390-ee42ffa431f9"
-const External_Quick_Links = "31822f7f-4709-4be7-b9ff-da41962a67d7"
-const Events_Id = "80d2331e-6970-4fe2-aa79-c6cae73bc150"
-const Navigation_Id = "a33a075f-afbd-477b-bacc-6eb609559fa4"
-const Ceo_Message = "b8771df7-e108-41c0-ab73-5f84ac930d24"
-const News_Id = "72988e1e-2ebf-48dc-96ce-2db3cbb7c3e3"
-const EmpHighlights = "14f67e9e-4581-4a06-8c29-f775b8770fe4"
-const HeroImage_Id = "7dfccbdf-0469-40e8-ab99-501d6314491f"
-const Photo_Gallery = "55cf720b-4646-49ed-bc64-c97ed72b75f0"
-const Site_Id = "tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43"
-const RemoNews_Id = "25fb939d-87e0-4fb5-b575-f11bd916e4df"
-const RemoEmpHight_Id = "2b3bb6db-7ba9-43e9-92b4-0216b80ef2fe"
-const EventFilter = "https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,1649e6fd-df59-4f03-8e4b-4d765864f406,d2634703-c0cd-42f6-bfb5-c60555dbcb7d/lists('Events')/items?$expand=fields&$orderby=fields/EventDate asc&$filter=fields/EventDate+gt+'2022-07-25'"
-import asyncHandler from '../middleware/asyncHandler'
-const AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=remoblobstorage;AccountKey=2dyNCBrGp/3St5coni+Xca3mFbQA67byG6qnp81UjypSK65msMG461kPruQ/Vr0EaZS0qk9y7dxewDnnb3kcxQ==;EndpointSuffix=core.windows.net"
+const REMO_SITE_ID =
+  "tmxin.sharepoint.com,1649e6fd-df59-4f03-8e4b-4d765864f406,d2634703-c0cd-42f6-bfb5-c60555dbcb7d";
+const AnnouncementId = "1b883bd5-98ef-4a8c-8390-ee42ffa431f9";
+const External_Quick_Links = "31822f7f-4709-4be7-b9ff-da41962a67d7";
+const Events_Id = "80d2331e-6970-4fe2-aa79-c6cae73bc150";
+const Navigation_Id = "a33a075f-afbd-477b-bacc-6eb609559fa4";
+const Ceo_Message = "b8771df7-e108-41c0-ab73-5f84ac930d24";
+const News_Id = "72988e1e-2ebf-48dc-96ce-2db3cbb7c3e3";
+const EmpHighlights = "14f67e9e-4581-4a06-8c29-f775b8770fe4";
+const HeroImage_Id = "7dfccbdf-0469-40e8-ab99-501d6314491f";
+const Photo_Gallery = "55cf720b-4646-49ed-bc64-c97ed72b75f0";
+const Site_Id =
+  "tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43";
+const RemoNews_Id = "25fb939d-87e0-4fb5-b575-f11bd916e4df";
+const RemoEmpHight_Id = "2b3bb6db-7ba9-43e9-92b4-0216b80ef2fe";
+const EventFilter =
+  "https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,1649e6fd-df59-4f03-8e4b-4d765864f406,d2634703-c0cd-42f6-bfb5-c60555dbcb7d/lists('Events')/items?$expand=fields&$orderby=fields/EventDate asc&$filter=fields/EventDate+gt+'2022-07-25'";
+import asyncHandler from "../middleware/asyncHandler";
 const app = express();
 // const getTokens = require('./graph')
 const getToken = (req: any, res: any) => {
-  res.send('all items')
-}
+  res.send("all items");
+};
 //  let variableToExport;
 // function RemoToken(token){
 // //  console.log(token,'aaaaaaaaaaaaaaaa')
@@ -36,7 +38,7 @@ const getToken = (req: any, res: any) => {
 // return token
 
 // }
-console.log(AZURE_STORAGE_CONNECTION_STRING, 'gthgtg')
+console.log(process.env.AZURE_STORAGE_CONNECTION_STRING, "gthgtg");
 
 // async function ffd(){
 //     // const resp = await axios.get('https://graph.microsoft.com/v1.0/me/drive/recent?$top=5&$orderby=lastModifiedDateTime desc', {
@@ -54,46 +56,46 @@ console.log(AZURE_STORAGE_CONNECTION_STRING, 'gthgtg')
 function Recent(data: any) {
   //    console.log(data,'gfdgfgfhgfh')
   //    res.send(files)
-  const dfsdfdf = data
+  const dfsdfdf = data;
   const Datsa = (req: any, res: any) => {
-    res.send('dfdgrdttrhtr')
-  }
+    res.send("dfdgrdttrhtr");
+  };
 }
 
 const createRequset = async (url: any, token: any) => {
   const res = await axios.get(url, {
     headers: {
-      'Authorization': `Bearer ${token} `,
-      'Content-Type': 'application/json'
-    }
-  })
-  console.log(res.data)
+      Authorization: `Bearer ${token} `,
+      "Content-Type": "application/json",
+    },
+  });
+  //console.log(res.data);
   //  app.get('/files',(req,res)=>{
   //     res.send(JSON.stringify(res.data))
   //  })
-  return res.data.value
-
-}
+  return res.data.value;
+};
 
 const ceomsg = async (url: any, token: any) => {
   const res = await axios.get(url, {
     headers: {
-      'Authorization': `Bearer ${token} `,
-      'Content-Type': 'application/json'
-    }
-  })
+      Authorization: `Bearer ${token} `,
+      "Content-Type": "application/json",
+    },
+  });
   // console.log(res.data,'yhj7jj78i989o9l')
-  if (!AZURE_STORAGE_CONNECTION_STRING) {
-
+  if (!process.env.AZURE_STORAGE_CONNECTION_STRING) {
     throw Error("Azure Storage Connection string not found");
   }
   //  const blobServiceClient= await BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING)
-  const containerName = res.data.value[0].fields.containerName
+  const containerName = res.data.value[0].fields.containerName;
   var blobName = res.data.value[0].fields.blobName;
   // var blobName = "CEO.png"
   // var filePath = "./Remo_Designs/CEO.png";
 
-  var blobService = azure.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
+  var blobService = azure.createBlobService(
+    process.env.AZURE_STORAGE_CONNECTION_STRING
+  );
   var startDate = new Date();
   startDate.setMinutes(startDate.getMinutes() - 5);
   var expiryDate = new Date(startDate);
@@ -101,13 +103,14 @@ const ceomsg = async (url: any, token: any) => {
 
   var sharedAccessPolicy = {
     AccessPolicy: {
-      Permissions: [azure.BlobUtilities.SharedAccessPermissions.READ],  //grent read permission only
+      Permissions: [azure.BlobUtilities.SharedAccessPermissions.READ], //grent read permission only
       Start: startDate,
-      Expiry: expiryDate
-    }
+      Expiry: expiryDate,
+    },
   };
   // @ts-ignore
-  var sasToken = blobService.generateSharedAccessSignature(containerName, blobName, sharedAccessPolicy);
+  var sasToken = blobService.generateSharedAccessSignature(containerName,blobName,sharedAccessPolicy
+  );
 
   var response = {};
   // @ts-ignore
@@ -115,27 +118,27 @@ const ceomsg = async (url: any, token: any) => {
 
   // console.log(response);
   let merged = { ...res.data, ...response };
-  return merged
-
-
-}
+  return merged;
+};
 
 const requestgraph = async (url: any, token: any) => {
   const res = await axios.get(url, {
     headers: {
-      'Authorization': `Bearer ${token} `,
-      'Content-Type': 'application/json'
-    }
-  })
-  if (!AZURE_STORAGE_CONNECTION_STRING) {
+      Authorization: `Bearer ${token} `,
+      "Content-Type": "application/json",
+    },
+  });
+  if (!process.env.AZURE_STORAGE_CONNECTION_STRING) {
     throw Error("Azure Storage Connection string not found");
   }
-  const containerName = res.data.value[0].fields.containerName
+  const containerName = res.data.value[0].fields.containerName;
   var blobName = res.data.value[0].fields.blobName;
   var blobName1 = res.data.value[1].fields.blobName;
   var blobName2 = res.data.value[2].fields.blobName;
 
-  var blobService = azure.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
+  var blobService = azure.createBlobService(
+    process.env.AZURE_STORAGE_CONNECTION_STRING
+  );
   var startDate = new Date();
   startDate.setMinutes(startDate.getMinutes() - 5);
   var expiryDate = new Date(startDate);
@@ -143,18 +146,21 @@ const requestgraph = async (url: any, token: any) => {
 
   var sharedAccessPolicy = {
     AccessPolicy: {
-      Permissions: [azure.BlobUtilities.SharedAccessPermissions.READ],  //grent read permission only
+      Permissions: [azure.BlobUtilities.SharedAccessPermissions.READ], //grent read permission only
       Start: startDate,
-      Expiry: expiryDate
-    }
+      Expiry: expiryDate,
+    },
   };
-  console.log(sharedAccessPolicy, 'lllltt')
+  //console.log(sharedAccessPolicy, "lllltt");
   // @ts-ignore
-  var sasToken = blobService.generateSharedAccessSignature(containerName, blobName, sharedAccessPolicy);
+  var sasToken = blobService.generateSharedAccessSignature(containerName,blobName,sharedAccessPolicy
+  );
   // @ts-ignore
-  var sasToken1 = blobService.generateSharedAccessSignature(containerName, blobName1, sharedAccessPolicy);
+  var sasToken1 = blobService.generateSharedAccessSignature(containerName,blobName1,sharedAccessPolicy
+  );
   // @ts-ignore
-  var sasToken2 = blobService.generateSharedAccessSignature(containerName, blobName2, sharedAccessPolicy);
+  var sasToken2 = blobService.generateSharedAccessSignature(containerName,blobName2,sharedAccessPolicy
+  );
 
   var response = {};
   var response1 = {};
@@ -170,39 +176,41 @@ const requestgraph = async (url: any, token: any) => {
   // console.log(response2);
   //  console.log(res.data.value[0].fields.newsUrl,'yyyy')
   //@ts-ignore
-  res.data.value[0].fields.newsUrl = response.image
+  res.data.value[0].fields.newsUrl = response.image;
   //@ts-ignore
-  res.data.value[1].fields.newsUrl = response1.image1
+  res.data.value[1].fields.newsUrl = response1.image1;
   //@ts-ignore
-  res.data.value[2].fields.newsUrl = response2.image2
-  console.log(res.data.value[2].fields, 'yyyy')
-  const m = { ...response, ...response1, ...response2 }
+  res.data.value[2].fields.newsUrl = response2.image2;
+  console.log(res.data.value[2].fields, "yyyy");
+  const m = { ...response, ...response1, ...response2 };
   //  console.log(m,'77777')
-  let alldata = { ...m, ...res.data }
+  let alldata = { ...m, ...res.data };
 
   // console.log(res.data)
   //  app.get('/files',(req,res)=>{
   //     res.send(JSON.stringify(res.data))
   //  })
   // return res.data.value
-  return alldata
-}
+  return alldata;
+};
 const requestgraphemp = async (url: any, token: any) => {
   const res = await axios.get(url, {
     headers: {
-      'Authorization': `Bearer ${token} `,
-      'Content-Type': 'application/json'
-    }
-  })
-  if (!AZURE_STORAGE_CONNECTION_STRING) {
+      Authorization: `Bearer ${token} `,
+      "Content-Type": "application/json",
+    },
+  });
+  if (!process.env.AZURE_STORAGE_CONNECTION_STRING) {
     throw Error("Azure Storage Connection string not found");
   }
-  const containerName = res.data.value[0].fields.containerName
+  const containerName = res.data.value[0].fields.containerName;
   var blobName = res.data.value[0].fields.blobName;
   var blobName1 = res.data.value[1].fields.blobName;
   var blobName2 = res.data.value[2].fields.blobName;
 
-  var blobService = azure.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
+  var blobService = azure.createBlobService(
+    process.env.AZURE_STORAGE_CONNECTION_STRING
+  );
   var startDate = new Date();
   startDate.setMinutes(startDate.getMinutes() - 5);
   var expiryDate = new Date(startDate);
@@ -210,18 +218,21 @@ const requestgraphemp = async (url: any, token: any) => {
 
   var sharedAccessPolicy = {
     AccessPolicy: {
-      Permissions: [azure.BlobUtilities.SharedAccessPermissions.READ],  //grent read permission only
+      Permissions: [azure.BlobUtilities.SharedAccessPermissions.READ], //grent read permission only
       Start: startDate,
-      Expiry: expiryDate
-    }
+      Expiry: expiryDate,
+    },
   };
-  console.log(sharedAccessPolicy, 'lllltt')
+ // console.log(sharedAccessPolicy, "lllltt");
   // @ts-ignore
-  var sasToken = blobService.generateSharedAccessSignature(containerName, blobName, sharedAccessPolicy);
+  var sasToken = blobService.generateSharedAccessSignature(containerName,blobName,sharedAccessPolicy
+  );
   // @ts-ignore
-  var sasToken1 = blobService.generateSharedAccessSignature(containerName, blobName1, sharedAccessPolicy);
+  var sasToken1 = blobService.generateSharedAccessSignature(containerName,blobName1,sharedAccessPolicy
+  );
   // @ts-ignore
-  var sasToken2 = blobService.generateSharedAccessSignature(containerName, blobName2, sharedAccessPolicy);
+  var sasToken2 = blobService.generateSharedAccessSignature(containerName,blobName2,sharedAccessPolicy
+  );
 
   var response = {};
   var response1 = {};
@@ -237,40 +248,42 @@ const requestgraphemp = async (url: any, token: any) => {
   // console.log(response2);
   //  console.log(res.data.value[0].fields.newsUrl,'yyyy')
   //@ts-ignore
-  res.data.value[0].fields.empUrl = response.image
+  res.data.value[0].fields.empUrl = response.image;
   //@ts-ignore
-  res.data.value[1].fields.empUrl = response1.image1
+  res.data.value[1].fields.empUrl = response1.image1;
   //@ts-ignore
-  res.data.value[2].fields.empUrl = response2.image2
-  console.log(res.data.value[2], 'yyyy')
-  const m = { ...response, ...response1, ...response2 }
+  res.data.value[2].fields.empUrl = response2.image2;
+  console.log(res.data.value[2], "yyyy");
+  const m = { ...response, ...response1, ...response2 };
   //  console.log(m,'77777')
-  let alldata = { ...m, ...res.data }
+  let alldata = { ...m, ...res.data };
 
   // console.log(res.data)
   //  app.get('/files',(req,res)=>{
   //     res.send(JSON.stringify(res.data))
   //  })
   // return res.data.value
-  return alldata
-}
+  return alldata;
+};
 
 const requestgraphhero = async (url: any, token: any) => {
   const res = await axios.get(url, {
     headers: {
-      'Authorization': `Bearer ${token} `,
-      'Content-Type': 'application/json'
-    }
-  })
-  if (!AZURE_STORAGE_CONNECTION_STRING) {
+      Authorization: `Bearer ${token} `,
+      "Content-Type": "application/json",
+    },
+  });
+  if (!process.env.AZURE_STORAGE_CONNECTION_STRING) {
     throw Error("Azure Storage Connection string not found");
   }
-  const containerName = res.data.value[0].fields.containerName
+  const containerName = res.data.value[0].fields.containerName;
   var blobName = res.data.value[0].fields.blobName;
   var blobName1 = res.data.value[1].fields.blobName;
   var blobName2 = res.data.value[2].fields.blobName;
 
-  var blobService = azure.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
+  var blobService = azure.createBlobService(
+    process.env.AZURE_STORAGE_CONNECTION_STRING
+  );
   var startDate = new Date();
   startDate.setMinutes(startDate.getMinutes() - 5);
   var expiryDate = new Date(startDate);
@@ -278,18 +291,19 @@ const requestgraphhero = async (url: any, token: any) => {
 
   var sharedAccessPolicy = {
     AccessPolicy: {
-      Permissions: [azure.BlobUtilities.SharedAccessPermissions.READ],  //grent read permission only
+      Permissions: [azure.BlobUtilities.SharedAccessPermissions.READ], //grent read permission only
       Start: startDate,
-      Expiry: expiryDate
-    }
+      Expiry: expiryDate,
+    },
   };
-  console.log(sharedAccessPolicy, 'lllltt')
+ // console.log(sharedAccessPolicy, "lllltt");
   // @ts-ignore
-  var sasToken = blobService.generateSharedAccessSignature(containerName, blobName, sharedAccessPolicy);
+  var sasToken = blobService.generateSharedAccessSignature(containerName,blobName,sharedAccessPolicy
+  );
   // @ts-ignore
-  var sasToken1 = blobService.generateSharedAccessSignature(containerName, blobName1, sharedAccessPolicy);
+  var sasToken1 = blobService.generateSharedAccessSignature(containerName,blobName1,sharedAccessPolicy);
   // @ts-ignore
-  var sasToken2 = blobService.generateSharedAccessSignature(containerName, blobName2, sharedAccessPolicy);
+  var sasToken2 = blobService.generateSharedAccessSignature(containerName,blobName2,sharedAccessPolicy);
 
   var response = {};
   var response1 = {};
@@ -305,56 +319,52 @@ const requestgraphhero = async (url: any, token: any) => {
   // console.log(response2);
   //  console.log(res.data.value[0].fields.newsUrl,'yyyy')
   //@ts-ignore
-  res.data.value[0].fields.heroUrl = response.image
+  res.data.value[0].fields.heroUrl = response.image;
   //@ts-ignore
-  res.data.value[1].fields.heroUrl = response1.image1
+  res.data.value[1].fields.heroUrl = response1.image1;
   //@ts-ignore
-  res.data.value[2].fields.heroUrl = response2.image2
-  console.log(res.data.value[2], 'yyyy')
-  const m = { ...response, ...response1, ...response2 }
+  res.data.value[2].fields.heroUrl = response2.image2;
+  console.log(res.data.value[2], "yyyy");
+  const m = { ...response, ...response1, ...response2 };
   //  console.log(m,'77777')
-  let alldata = { ...m, ...res.data }
+  let alldata = { ...m, ...res.data };
 
   // console.log(res.data)
   //  app.get('/files',(req,res)=>{
   //     res.send(JSON.stringify(res.data))
   //  })
   // return res.data.value
-  return alldata
-}
+  return alldata;
+};
 // const sendData = (data,req,res) =>{
 //     res.send(data);
 // }
 const createToken = asyncHandler(async (req: any, res: any) => {
-
   // console.log(req.body)
-  const { token } = req.body
+  const { token } = req.body;
 
   if (!token) {
     return res.status(404).json({
       success: false,
-      error: 'No token found'
+      error: "No token found",
     });
   }
-
 
   // res.status(StatusCodes.OK).json({
   //     success: true,
   //     data: RecentFiles,Announcement
   // });
-
 });
 // console.log(AccessToken,'llllll'
 
-
 const getEventData = asyncHandler(async (req: Request, res: Response) => {
-  console.log(req.headers.authorization, 'tsfff')
-  // const {token} = req.params
-  const  token = req.headers.authorization
+  console.log(req.headers.authorization, "getEventData");
+
+  //  const  token = req.headers.authorization
   // console.log(req.body)
-  // const  token  =req.headers.authorization
+  const token = req.headers.authorization;
   //  const {token} = req.body
-  console.log(token, 'llssdsdssdsdsdsdsll')
+ console.log(token, "getEventData");
   // console.log(req.body,'gregrthtrht')
   if (!token) {
     // const dataFiles = await createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Events_Id}/items?$expand=fields`, token )
@@ -366,9 +376,8 @@ const getEventData = asyncHandler(async (req: Request, res: Response) => {
     //  res.send(dataFiles)
     return res.status(404).json({
       success: false,
-      error: "No Token found"
+      error: "No Token found",
     });
-
   } else {
     //   const Event = await createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Events_Id}/items?$expand=fields`, token )
     // console.log(Event,'dgdfgthtrhytjytjyt')
@@ -395,7 +404,10 @@ const getEventData = asyncHandler(async (req: Request, res: Response) => {
     //    sendData(dataFiles)
     res.status(200).json({
       success: true,
-      response: await createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Events_Id}/items?$expand=fields`, token)
+      response: await createRequset(
+        `${BASE_PATH}/${REMO_SITE_ID}/lists/${Events_Id}/items?$expand=fields`,
+        token
+      ),
       // Event,
       // QuickLinks,
       // RecentFiles,
@@ -407,120 +419,114 @@ const getEventData = asyncHandler(async (req: Request, res: Response) => {
       // Hero,
       // Gallery
     });
-
   }
-
-})
-
-
-
+});
 
 const getQuicklinkData = asyncHandler(async (req: Request, res: Response) => {
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  // const {token} = req.params
-    const  token = req.headers.authorization
+  // console.log(
+  //   req.headers.authorization,
+  //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+  // );
+
+  //  const  token = req.headers.authorization
   // console.log(req.body)
-  // const  token  = req.headers.authorization
+  const token = req.headers.authorization;
   //  const {token} = req.body
-  console.log(token, 'llll')
+  //console.log(token, "llll");
   // console.log(req.body,'gregrthtrht')
   if (!token) {
-
     return res.status(404).json({
       success: false,
-      error: "No Token found"
+      error: "No Token found",
     });
-
   } else {
-
     res.status(200).json({
       success: true,
-      response: await createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${External_Quick_Links}/items?$expand=fields`, token)
-
+      response: await createRequset(
+        `${BASE_PATH}/${REMO_SITE_ID}/lists/${External_Quick_Links}/items?$expand=fields`,
+        token
+      ),
     });
-
   }
-
-})
+});
 
 const getRecentFilesData = asyncHandler(async (req: Request, res: Response) => {
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  // const {token} = req.params
- const  token = req.headers.authorization
+  // console.log(
+  //   req.headers.authorization,
+  //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+  // );
+
+  // const  token = req.headers.authorization
   // console.log(req.body)
-  // const  token  = req.headers.authorization
+  const token = req.headers.authorization;
   //  const {token} = req.body
-  console.log(token, 'llll')
+  //console.log(token, "llll");
   // console.log(req.body,'gregrthtrht')
   if (!token) {
-
     return res.status(404).json({
       success: false,
-      error: "No Token found"
+      error: "No Token found",
     });
-
   } else {
-
     res.status(200).json({
       success: true,
-      response: await createRequset('https://graph.microsoft.com/v1.0/me/drive/recent?$top=5&$orderby=lastModifiedDateTime desc', token)
-
+      response: await createRequset(
+        "https://graph.microsoft.com/v1.0/me/drive/recent?$top=5&$orderby=lastModifiedDateTime desc",
+        token
+      ),
     });
-
   }
+});
 
-})
+const getAnnouncementData = asyncHandler(
+  async (req: Request, res: Response) => {
+    // console.log(req.headers,'lllllllllll')
+    // console.log(req.body)
+    // console.log(
+    //   req.headers.authorization,
+    //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+    // );
 
-
-const getAnnouncementData = asyncHandler(async (req: Request, res: Response) => {
-  // console.log(req.headers,'lllllllllll')
-  // console.log(req.body)
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  // const {token} = req.params
-  const  token = req.headers.authorization
-  // const  token  = req.headers.authorization
-  //  const {token} = req.body
-  console.log(token, 'llll')
-  // console.log(req.body,'gregrthtrht')
-  if (!token) {
-
-    return res.status(404).json({
-      success: false,
-      error: "No Token found"
-    });
-
-  } else {
-
-    res.status(200).json({
-      success: true,
-      response: await createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${AnnouncementId}/items?$expand=fields`, token)
-
-    });
-
+    // const  token = req.headers.authorization
+    const token = req.headers.authorization;
+    //  const {token} = req.body
+   // console.log(token, "llll");
+    // console.log(req.body,'gregrthtrht')
+    if (!token) {
+      return res.status(404).json({
+        success: false,
+        error: "No Token found",
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        response: await createRequset(
+          `${BASE_PATH}/${REMO_SITE_ID}/lists/${AnnouncementId}/items?$expand=fields`,
+          token
+        ),
+      });
+    }
   }
-
-})
-
+);
 
 const getNavigationData = asyncHandler(async (req: Request, res: Response) => {
-
   // console.log(req.body)
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  // const {token} = req.params
-  const  token = req.headers.authorization
-  // const  token  = req.headers.authorization
+  // console.log(
+  //   req.headers.authorization,
+  //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+  // );
+
+  // const  token = req.headers.authorization
+  const token = req.headers.authorization;
   //  const {token} = req.body
-  console.log(token, 'llll')
+  //console.log(token, "llll");
   // console.log(req.body,'gregrthtrht')
   if (!token) {
-
     return res.status(404).json({
       success: false,
-      error: "No Token found"
+      error: "No Token found",
     });
-
   } else {
-
     // res.status(200).json({
     //    success: true,
     //    response :await createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Navigation_Id}/items?$expand=fields`,token)
@@ -529,101 +535,139 @@ const getNavigationData = asyncHandler(async (req: Request, res: Response) => {
     const response =
       // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
       // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
-      await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('NavigationHome')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`, {
-        headers: {
-          'Authorization': `Bearer ${token} `,
-          'Content-Type': 'application/json',
-          'Prefer': 'HonorNonIndexedQueriesWarningMayFailRandomly'
-
+      await axios.get(
+        `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('NavigationHome')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`,
+        {
+          headers: {
+            Authorization: `Bearer ${token} `,
+            "Content-Type": "application/json",
+            Prefer: "HonorNonIndexedQueriesWarningMayFailRandomly",
+          },
         }
+      );
 
-      })
-
-
-    console.log(response.data.value, "meetingssssssssssssssssssssssss")
+    //console.log(response.data.value, "meetingssssssssssssssssssssssss");
     res.status(200).json({
       success: true,
       response: response.data.value,
       // response1:responseTop.data.value
-
-
     });
-
-
   }
+});
 
-})
+const getRemoQuickLinkData = asyncHandler(
+  async (req: Request, res: Response) => {
+    // console.log(req.body)
+    // console.log(
+    //   req.headers.authorization,
+    //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+    // );
 
-const getRemoQuickLinkData = asyncHandler(async (req: Request, res: Response) => {
+    // const  token = req.headers.authorization
+    const token = req.headers.authorization;
+    //  const {token} = req.body
+    //console.log(token, "llll");
+    // console.log(req.body,'gregrthtrht')
+    if (!token) {
+      return res.status(404).json({
+        success: false,
+        error: "No Token found",
+      });
+    } else {
+      // res.status(200).json({
+      //    success: true,
+      //    response :await createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Navigation_Id}/items?$expand=fields`,token)
 
-  // console.log(req.body)
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  // const {token} = req.params
-   const  token = req.headers.authorization
-  // const  token  = req.headers.authorization
-  //  const {token} = req.body
-  console.log(token, 'llll')
-  // console.log(req.body,'gregrthtrht')
-  if (!token) {
+      // });
+      const response =
+        // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+        // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
+        await axios.get(
+          `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('QuickLinks')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`,
+          {
+            headers: {
+              Authorization: `Bearer ${token} `,
+              "Content-Type": "application/json",
+              Prefer: "HonorNonIndexedQueriesWarningMayFailRandomly",
+            },
+          }
+        );
 
-    return res.status(404).json({
-      success: false,
-      error: "No Token found"
-    });
-
-  } else {
-
-    // res.status(200).json({
-    //    success: true,
-    //    response :await createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Navigation_Id}/items?$expand=fields`,token)
-
-    // });
-    const response =
-      // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
-      // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
-      await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('QuickLinks')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`, {
-        headers: {
-          'Authorization': `Bearer ${token} `,
-          'Content-Type': 'application/json',
-          'Prefer': 'HonorNonIndexedQueriesWarningMayFailRandomly'
-
-        }
-
-      })
-
-
-    console.log(response.data.value, "meetingssssssssssssssssssssssss")
-    res.status(200).json({
-      success: true,
-      response: response.data.value,
-      // response1:responseTop.data.value
-
-
-    });
-
-
+      //console.log(response.data.value, "meetingssssssssssssssssssssssss");
+      res.status(200).json({
+        success: true,
+        response: response.data.value,
+        // response1:responseTop.data.value
+      });
+    }
   }
+);
+const getOrgChartData = asyncHandler(
+  async (req: Request, res: Response) => {
+   console.log(req.body, 'org Chart')
+    console.log(
+      req.headers.authorization,
+      "org Chart Data"
+    );
 
-})
+    // const  token = req.headers.authorization
+    const token = req.headers.authorization;
+    //  const {token} = req.body
+   console.log(token, "org Chart Token");
+    // console.log(req.body,'gregrthtrht')
+    if (!token) {
+      return res.status(404).json({
+        success: false,
+        error: "No Token found",
+      });
+    } else {
+      // res.status(200).json({
+      //    success: true,
+      //    response :await createRequset(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Navigation_Id}/items?$expand=fields`,token)
+
+      // });
+      const response =
+        // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+        // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
+        await axios.get(
+          `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/4ec2406b-7a29-46ca-91f8-0f21dde53c2f`,
+          {
+            headers: {
+              Authorization: `Bearer ${token} `,
+              "Content-Type": "application/json",
+              Prefer: "HonorNonIndexedQueriesWarningMayFailRandomly",
+            },
+          }
+        );
+
+     console.log(response.data.value, "org cHart value");
+      res.status(200).json({
+        success: true,
+        response: response.data.value,
+        // response1:responseTop.data.value
+      });
+    }
+  }
+);
 
 const getCeoMsgData = asyncHandler(async (req: Request, res: Response) => {
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  // const {token} = req.params
-  const  token = req.headers.authorization
+  // console.log(
+  //   req.headers.authorization,
+  //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+  // );
+
+  // const  token = req.headers.authorization
   // console.log(req.body)
-  // const  token  = req.headers.authorization
+  const token = req.headers.authorization;
   //  const {token} = req.body
-  console.log(token, 'llll')
+  //console.log(token, "llll");
   // console.log(req.body,'gregrthtrht')
   if (!token) {
-
     return res.status(404).json({
       success: false,
-      error: "No Token found"
+      error: "No Token found",
     });
-
   } else {
-
     // res.status(200).json({
     //    success: true,
     //    response :await ceomsg(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Ceo_Message}/items?$expand=fields`,token)
@@ -632,373 +676,587 @@ const getCeoMsgData = asyncHandler(async (req: Request, res: Response) => {
     const response =
       // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
       // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
-      await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('Ceo')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`, {
-        headers: {
-          'Authorization': `Bearer ${token} `,
-          'Content-Type': 'application/json',
-          'Prefer': 'HonorNonIndexedQueriesWarningMayFailRandomly'
-
+      await axios.get(
+        `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('Ceo')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`,
+        {
+          headers: {
+            Authorization: `Bearer ${token} `,
+            "Content-Type": "application/json",
+            Prefer: "HonorNonIndexedQueriesWarningMayFailRandomly",
+          },
         }
+      );
 
-      })
-
-
-    console.log(response.data.value, "meetingssssssssssssssssssssssss")
+    //console.log(response.data.value, "meetingssssssssssssssssssssssss");
     res.status(200).json({
       success: true,
       response: response.data.value,
       // response1:responseTop.data.value
-
-
     });
   }
-
-})
-
-const getNewsData = asyncHandler(async (req: Request, res: Response) => {
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-
-   const  token = req.headers.authorization
+});
+const getDepartmentListData = asyncHandler(async (req: Request, res: Response) => {
+  console.log(
+    req.headers.authorization,
+    "department list"
+  );
+//const  token = req.headers.authorization
   // console.log(req.body)
-  // const { token } = req.params
+  const token = req.headers.authorization;
   //  const {token} = req.body
-  console.log(token, 'llll')
+ console.log(token, "department token");
   // console.log(req.body,'gregrthtrht')
   if (!token) {
-
     return res.status(404).json({
       success: false,
-      error: "No Token found"
+      error: "No Token found",
     });
-
   } else {
+    // res.status(200).json({
+    //    success: true,
+    //    response :await ceomsg(`${BASE_PATH}/${REMO_SITE_ID}/lists/${Ceo_Message}/items?$expand=fields`,token)
 
+    // });
+    const response =
+      // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+      // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
+      await axios.get(
+        `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/e3d3ceb0-5e66-49ea-92c7-e1eb83cdb7c0/items?$expand=fields&$filter=fields/isActive eq 1`,
+        {
+          headers: {
+            Authorization: `Bearer ${token} `,
+            "Content-Type": "application/json",
+            Prefer: "HonorNonIndexedQueriesWarningMayFailRandomly",
+          },
+        }
+      );
+
+    console.log(response.data.value, "department master");
     res.status(200).json({
       success: true,
-      response: await requestgraph(`${BASE_PATH}/${REMO_SITE_ID}/lists/${News_Id}/items?$expand=fields`, token)
-
+      response: response.data.value,
+      // response1:responseTop.data.value
     });
-
   }
+});
 
-})
+const getNewsData = asyncHandler(async (req: Request, res: Response) => {
+  // console.log(
+  //   req.headers.authorization,
+  //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+  // );
 
-
-const getEmpData = asyncHandler(async (req: Request, res: Response) => {
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  // const {token} = req.params
-   const  token = req.headers.authorization
-  // console.log(req.body)
   // const  token = req.headers.authorization
+  // console.log(req.body)
+  const { token } = req.params;
   //  const {token} = req.body
-  console.log(token, 'llll')
+  //console.log(token, "llll");
   // console.log(req.body,'gregrthtrht')
   if (!token) {
-
     return res.status(404).json({
       success: false,
-      error: "No Token found"
+      error: "No Token found",
     });
+  } else {
+    res.status(200).json({
+      success: true,
+      response: await requestgraph(
+        `${BASE_PATH}/${REMO_SITE_ID}/lists/${News_Id}/items?$expand=fields`,
+        token
+      ),
+    });
+  }
+});
 
+const getEmpData = asyncHandler(async (req: Request, res: Response) => {
+  // console.log(
+  //   req.headers.authorization,
+  //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+  // );
+
+  // const  token = req.headers.authorization
+  // console.log(req.body)
+  const token = req.headers.authorization;
+  //  const {token} = req.body
+  console.log(token, "llll");
+  // console.log(req.body,'gregrthtrht')
+  if (!token) {
+    return res.status(404).json({
+      success: false,
+      error: "No Token found",
+    });
   } else {
     const response =
       // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
       // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/2b3bb6db-7ba9-43e9-92b4-0216b80ef2fe/items?$expand=fields`, {
-      await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('EmpHighlights')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`, {
-        headers: {
-          'Authorization': `Bearer ${token} `,
-          'Content-Type': 'application/json',
-          'Prefer': 'HonorNonIndexedQueriesWarningMayFailRandomly'
+      await axios.get(
+        `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('EmpHighlights')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`,
+        {
+          headers: {
+            Authorization: `Bearer ${token} `,
+            "Content-Type": "application/json",
+            Prefer: "HonorNonIndexedQueriesWarningMayFailRandomly",
+          },
         }
-
-      })
+      );
     res.status(200).json({
       success: true,
-      response: response.data.value
-
+      response: response.data.value,
     });
-
   }
-
-})
-
+});
 
 const getHeroData = asyncHandler(async (req: Request, res: Response) => {
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
- 
-   const  token = req.headers.authorization
+  // console.log(
+  //   req.headers.authorization,
+  //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+  // );
+
+  // const  token = req.headers.authorization
   // console.log(req.body)
-  // const { token } = req.params
+  const { token } = req.params;
   //  const {token} = req.body
-  console.log(token, 'llll')
+  //console.log(token, "llll");
   // console.log(req.body,'gregrthtrht')
   if (!token) {
-
     return res.status(404).json({
       success: false,
-      error: "No Token found"
+      error: "No Token found",
     });
-
   } else {
-
     res.status(200).json({
       success: true,
-      response: await requestgraphhero(`${BASE_PATH}/${REMO_SITE_ID}/lists/${HeroImage_Id}/items?$expand=fields`, token)
-
+      response: await requestgraphhero(
+        `${BASE_PATH}/${REMO_SITE_ID}/lists/${HeroImage_Id}/items?$expand=fields`,
+        token
+      ),
     });
-
   }
-
-})
-
+});
 
 const getEventsMeetings = asyncHandler(async (req: Request, res: Response) => {
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  // const {token} = req.params
-   const  token = req.headers.authorization
+  // console.log(
+  //   req.headers.authorization,
+  //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+  // );
+
+  // const  token = req.headers.authorization
   // console.log(req.body)
-  // const  token  = req.headers.authorization
+  const token = req.headers.authorization;
   //  const {token} = req.body
-  console.log(token, 'llll')
+  console.log(token, "llll");
   // console.log(req.body,'gregrthtrht')
   if (!token) {
-
     return res.status(404).json({
       success: false,
-      error: "No Token found"
+      error: "No Token found",
     });
-
   } else {
-    var td = moment().subtract(2, 'days').format('YYYY-MM-DD');
-    var enddate = moment().add(1, 'days').format("YYYY-MM-DD");
+    var td = moment().subtract(2, "days").format("YYYY-MM-DD");
+    var enddate = moment().add(1, "days").format("YYYY-MM-DD");
     const response =
       // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
-      await axios.get(`https://graph.microsoft.com/v1.0/me/calendarView?startDateTime=${td}T21:00:00.000Z&endDateTime=${enddate}T21:00:00.000Z&$orderBy=start/dateTime&$top=5`, {
-        headers: {
-          'Authorization': `Bearer ${token} `,
-          'Content-Type': 'application/json'
-
+      await axios.get(
+        `https://graph.microsoft.com/v1.0/me/calendarView?startDateTime=${td}T21:00:00.000Z&endDateTime=${enddate}T21:00:00.000Z&$orderBy=start/dateTime&$top=5`,
+        {
+          headers: {
+            Authorization: `Bearer ${token} `,
+            "Content-Type": "application/json",
+          },
         }
-
-      })
-    console.log(response.data.value, "meetingssssssssssssssssssssssss")
+      );
+    console.log(response.data.value, "meetingssssssssssssssssssssssss");
     res.status(200).json({
       success: true,
-      response: response.data.value
-
+      response: response.data.value,
     });
-
   }
-
-
-})
+});
 
 const getRemoNews = asyncHandler(async (req: Request, res: Response) => {
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  // const {token} = req.params
-   const  token = req.headers.authorization
+  // console.log(
+  //   req.headers.authorization,
+  //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+  // );
+
+  // const  token = req.headers.authorization
   // console.log(req.body)
-  // const  token  = req.headers.authorization
+  const token = req.headers.authorization;
   //  const {token} = req.body
-  console.log(token, 'llll')
+  console.log(token, "llll");
   // console.log(req.body,'gregrthtrht')
   if (!token) {
-
     return res.status(404).json({
       success: false,
-      error: "No Token found"
+      error: "No Token found",
     });
-
   } else {
-
     const response =
       // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
-      await axios.get(`${BASE_PATH}/${Site_Id}/lists/${RemoNews_Id}/items?$expand=fields`, {
-        headers: {
-          'Authorization': `Bearer ${token} `,
-          'Content-Type': 'application/json'
-
+      await axios.get(
+        `${BASE_PATH}/${Site_Id}/lists/${RemoNews_Id}/items?$expand=fields`,
+        {
+          headers: {
+            Authorization: `Bearer ${token} `,
+            "Content-Type": "application/json",
+          },
         }
-
-      })
+      );
 
     const responseTop =
       // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
-      await axios.get(`${BASE_PATH}/${Site_Id}/lists/${RemoNews_Id}/items?$expand=fields&$top=5`, {
-        headers: {
-          'Authorization': `Bearer ${token} `,
-          'Content-Type': 'application/json'
-
+      await axios.get(
+        `${BASE_PATH}/${Site_Id}/lists/${RemoNews_Id}/items?$expand=fields&$top=5`,
+        {
+          headers: {
+            Authorization: `Bearer ${token} `,
+            "Content-Type": "application/json",
+          },
         }
-
-      })
-    console.log(response.data.value, "meetingssssssssssssssssssssssss")
+      );
+    console.log(response.data.value, "meetingssssssssssssssssssssssss");
     res.status(200).json({
       success: true,
       response: response.data.value,
-      response1: responseTop.data.value
-
-
+      response1: responseTop.data.value,
     });
-
   }
-
-
-})
-
+});
 
 const getRemoHero = asyncHandler(async (req: Request, res: Response) => {
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  // const {token} = req.params
- const  token = req.headers.authorization
+  // console.log(
+  //   req.headers.authorization,
+  //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+  // );
+
+  // const  token = req.headers.authorization
   // console.log(req.body)
-  // const  token  = req.headers.authorization
+  const token = req.headers.authorization;
   //  const {token} = req.body
-  console.log(token, 'llll')
+  //console.log(token, "llll");
   // console.log(req.body,'gregrthtrht')
   if (!token) {
-
     return res.status(404).json({
       success: false,
-      error: "No Token found"
+      error: "No Token found",
     });
-
   } else {
-
     const response =
       // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
       // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
-      await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('Hero')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`, {
-        headers: {
-          'Authorization': `Bearer ${token} `,
-          'Content-Type': 'application/json',
-          'Prefer': 'HonorNonIndexedQueriesWarningMayFailRandomly'
-
+      await axios.get(
+        `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('Hero')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`,
+        {
+          headers: {
+            Authorization: `Bearer ${token} `,
+            "Content-Type": "application/json",
+            Prefer: "HonorNonIndexedQueriesWarningMayFailRandomly",
+          },
         }
+      );
 
-      })
-
-
-    console.log(response.data.value, "meetingssssssssssssssssssssssss")
+   // console.log(response.data.value, "meetingssssssssssssssssssssssss");
     res.status(200).json({
       success: true,
       response: response.data.value,
       // response1:responseTop.data.value
-
-
     });
-
   }
+});
 
+async function checked(token: any) {
+  const res = await axios.get(`https://graph.microsoft.com/v1.0/me`, {
+    headers: {
+      Authorization: `Bearer ${token} `,
+      "Content-Type": "application/json",
+    },
+  });
+  // return res.data.mail
+  const list = await axios.get(
+    `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('Portal Content Admins')/items?$expand=fields`,
+    {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Prefer: "HonorNonIndexedQueriesWarningMayFailRandomly",
+      },
+    }
+  );
+  // const present = list.data.value.map((a: any) => {
+  //   // return a.fields.UserName.filter((s: any) => s.Email == 'regrgrgrewswwww')
+  // return  a.fields.UserName.map((w:any) =>{
+  //        if(w.Email == res.data.mail) {
+  //          return true
+  //        }else{
+  //         return false
+  //        }
+  //   })
+  // })
+  // return present
 
-})
+  const present = list.data.value;
+  // var listContacts = function() {
+  //   return present.map(function(contact:any) {
+  //     return contact.fields
+  //   })
+  // };
+  // // console.log(listContacts());
+  // const ee =listContacts()
+  const rr = present.reduce(
+    (prev: any, product: any) =>
+      prev ||
+      product.fields.UserName.find((item: any) => item.Email === res.data.mail),
+    undefined
+  );
+  return rr;
+}
 
-const getRemoContentEditorMaster = asyncHandler(async (req: Request, res: Response) => {
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  // const {token} = req.params
-  const  token = req.headers.authorization
-  // console.log(req.body)
-  // const  token  = req.headers.authorization
-  //  const {token} = req.body
-  console.log(token, 'llll')
-  // console.log(req.body,'gregrthtrht')
-  if (!token) {
+const getRemoContentEditorMaster = asyncHandler(
+  async (req: Request, res: Response) => {
+    //console.log(req.headers.authorization, "content editor mater");
 
-    return res.status(404).json({
-      success: false,
-      error: "No Token found"
-    });
+    // const  token = req.headers.authorization
+    // console.log(req.body)
+    const token = req.headers.authorization;
+    //  const {token} = req.body
 
-  } else {
+    if (!token) {
+      return res.status(404).json({
+        success: false,
+        error: "No Token found",
+      });
+    } else {
+     // console.log(token, "llll");
 
-    const response =
-      // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
-      // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
-      await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('ContentEditorMaster')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`, {
-        headers: {
-          'Authorization': `Bearer ${token} `,
-          'Content-Type': 'application/json',
-          'Prefer': 'HonorNonIndexedQueriesWarningMayFailRandomly'
+      const ans = await checked(token);
 
-        }
+      //console.log(ans, "gregrthtrht");
 
-      })
+      // const checkedValue = ans[0][0].UserEmail
+      if (ans !== undefined) {
+        const response =
+          // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+          // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
+          await axios.get(
+            `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('ContentEditorMaster')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`,
+            {
+              headers: {
+                Authorization: `Bearer ${token} `,
+                "Content-Type": "application/json",
+                Prefer: "HonorNonIndexedQueriesWarningMayFailRandomly",
+              },
+            }
+          );
 
-
-    console.log(response.data.value, "meetingssssssssssssssssssssssss")
-    res.status(200).json({
-      success: true,
-      response: response.data.value,
-      // response1:responseTop.data.value
-
-
-    });
-
+        // console.log(response.data.value, "meetingssssssssssssssssssssssss")
+        res.status(200).json({
+          success: true,
+          response: response.data.value,
+          // response1:responseTop.data.value
+        });
+      } else {
+        res.status(200).json({
+          success: true,
+          response: "Only Admin can Access",
+          // response1:responseTop.data.value
+        });
+      }
+    }
   }
+);
+const getRemoPolicy = asyncHandler(
+  async (req: Request, res: Response) => {
+    console.log(req.headers.authorization, "policy mater");
 
+    // const  token = req.headers.authorization
+    // console.log(req.body)
+    const token = req.headers.authorization;
+    //  const {token} = req.body
 
-})
+    if (!token) {
+      return res.status(404).json({
+        success: false,
+        error: "No Token found",
+      });
+    } else {
+      console.log(token, "get policy controller");
+
+      const ans = await checked(token);
+
+      console.log(ans, "get policy cont");
+
+      // const checkedValue = ans[0][0].UserEmail
+      if (ans !== undefined) {
+        const response =
+          // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+          // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
+          await axios.get(
+            `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/drives/b!cIcBOTQ170ygV3hcQ7aiAKUmwUfuMwpCqErIQwo2ikPU-UPjxittT53b2Hcjy4dk/root/children`,
+            {
+              headers: {
+                Authorization: `Bearer ${token} `,
+                "Content-Type": "application/json",
+                Prefer: "HonorNonIndexedQueriesWarningMayFailRandomly",
+              },
+            }
+          );
+
+        // console.log(response.data.value, "meetingssssssssssssssssssssssss")
+        res.status(200).json({
+          success: true,
+          response: response.data.value,
+          // response1:responseTop.data.value
+        });
+      } else {
+        res.status(200).json({
+          success: true,
+          response: "Only Admin can Access",
+          // response1:responseTop.data.value
+        });
+      }
+    }
+  }
+);
 
 const getRemoEvents = asyncHandler(async (req: Request, res: Response) => {
-  console.log(req.headers.authorization, 'tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy')
-  // const {token} = req.params
-   const  token = req.headers.authorization
+  // console.log(
+  //   req.headers.authorization,
+  //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+  // );
+
+  // const  token = req.headers.authorization
   // console.log(req.body)
-  // const  token  = req.headers.authorization
+  const token = req.headers.authorization;
   //  const {token} = req.body
-  console.log(token, 'llll')
+  //console.log(token, "llll");
   // console.log(req.body,'gregrthtrht')
   if (!token) {
-
     return res.status(404).json({
       success: false,
-      error: "No Token found"
+      error: "No Token found",
     });
-
   } else {
-
     const response =
       // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
       // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
-      await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('Events')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`, {
-        headers: {
-          'Authorization': `Bearer ${token} `,
-          'Content-Type': 'application/json',
-          'Prefer': 'HonorNonIndexedQueriesWarningMayFailRandomly'
-
+      await axios.get(
+        `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists('Events')/items?$expand=fields&$select=*&$filter=fields/isDraft  ne '1'`,
+        {
+          headers: {
+            Authorization: `Bearer ${token} `,
+            "Content-Type": "application/json",
+            Prefer: "HonorNonIndexedQueriesWarningMayFailRandomly",
+          },
         }
+      );
 
-      })
-
-
-    console.log(response.data.value, "meetingssssssssssssssssssssssss")
+    //console.log(response.data.value, "meetingssssssssssssssssssssssss");
     res.status(200).json({
       success: true,
       response: response.data.value,
       // response1:responseTop.data.value
-
-
     });
-
   }
+});
 
+async function getEmail(token: any) {
+  const res = await axios.get(`https://graph.microsoft.com/v1.0/me`, {
+    headers: {
+      Authorization: `Bearer ${token} `,
+      "Content-Type": "application/json",
+    },
+  });
+  return res.data.mail;
+}
 
-})
+const getUserSpecificQuickLink = asyncHandler(
+  async (req: Request, res: Response) => {
+    // console.log(
+    //   req.headers.authorization,
+    //   "tfssadsadsadasdsaasdasdsadsadsadssccccttddddttttvvvvvtttttttyy"
+    // );
 
+    // const  token = req.headers.authorization
+    // console.log(req.body)
+    const token = req.headers.authorization;
+    //  const {token} = req.body
+    //console.log(token, "llll");
+    // console.log(req.body,'gregrthtrht')
+    if (!token) {
+      return res.status(404).json({
+        success: false,
+        error: "No Token found",
+      });
+    } else {
+      const ans = await getEmail(token);
+      //console.log(ans, "nas");
+      const response =
+        // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
+        // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
+        await axios.get(
+          `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/d438556e-ff96-47cc-803d-c14ffb9c4d2a/items?expand=fields(select=GlobalQuickLinks,GlobalQuickLinks_x003a__x0020_Ho)&$filter=fields/Title eq '${ans}'`,
+          {
+            headers: {
+              Authorization: `Bearer ${token} `,
+              "Content-Type": "application/json",
+              Prefer: "HonorNonIndexedQueriesWarningMayFailRandomly",
+            },
+          }
+        );
 
+      const arrayObj = response.data.value;
+      const arrayObj1 = arrayObj.map((item: any) => {
+        return item.fields.GlobalQuickLinks_x003a__x0020_Ho.map((i: any) => {
+          return {
+            LookupId: i.LookupId,
+            Image: i.LookupValue,
+          };
+        });
+      });
+      const arre = arrayObj.map((item: any) => {
+        return item.fields.GlobalQuickLinks.map((i: any) => {
+          return {
+            LookupId: i.LookupId,
+            LookupValue: i.LookupValue,
+          };
+        });
+      });
+      const arrMap = arrayObj1.flatMap((m: any) => m);
+      const arrMap2 = arre.flatMap((m: any) => m);
 
+      let arr3 = arrMap2.map((item: any, i: any) =>
+        Object.assign({}, item, arrMap[i])
+      );
+      // const obj3 = arre.map((item:any) => {
+      //   return {
+      //     ...item, // will consist all the items from object2
+      //     // get index from object1 where the code matches
+      //     Image: arrayObj1.find((elem:any) => elem.LookupId === item.LookupId)
+      //   }
+      // });
+      // let arr3 = arr1.map((item, i) => Object.assign({}, item, arr2[i]));
+
+      // console.log(response.data.value, "meetingssssssssssssssssssssssss")
+      res.status(200).json({
+        success: true,
+        response: arr3,
+        // response1:responseTop.data.value
+      });
+    }
+  }
+);
 
 export {
   getToken,
   createToken,
   // Datsa,
-
   getEventData,
   getQuicklinkData,
   getRecentFilesData,
   getAnnouncementData,
   getNavigationData,
   getCeoMsgData,
+  getDepartmentListData,
   getNewsData,
   getEmpData,
   getHeroData,
@@ -1007,8 +1265,9 @@ export {
   getRemoNews,
   getRemoHero,
   getRemoContentEditorMaster,
+  getRemoPolicy,
   getRemoEvents,
-  getRemoQuickLinkData
-
-
-}
+  getRemoQuickLinkData,
+  getUserSpecificQuickLink,
+  getOrgChartData,
+};

@@ -7,7 +7,6 @@ import asyncHandler from './../../middleware/asyncHandler'
 const Site_Id = 'tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43'
 const Announcement_Id = '4d933ed8-bce3-4429-9af6-8e509eb6d2dc'
 const BASE_PATH = `https://graph.microsoft.com/v1.0/sites`;
-const AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=remoblobstorage;AccountKey=2dyNCBrGp/3St5coni+Xca3mFbQA67byG6qnp81UjypSK65msMG461kPruQ/Vr0EaZS0qk9y7dxewDnnb3kcxQ==;EndpointSuffix=core.windows.net"
 // const Emp_id ='2b3bb6db-7ba9-43e9-92b4-0216b80ef2fe'
 // const bodyParser = require('body-parser');
 // const app = express();
@@ -16,7 +15,7 @@ const AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountN
 
 function blobStorage(image: any, imageName: any) {
   //@ts-ignore
-  var blobService = azure.createBlobService(AZURE_STORAGE_CONNECTION_STRING);
+  var blobService = azure.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
   var matches = image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
   if(matches !== null){
   var type = matches[1];
