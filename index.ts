@@ -1591,4 +1591,4 @@ app.use(`/api/v1/contentEditor`,announcement,herobanner,ceo,employee,news,events
 
 app.use(`/api/v1/gallery`,photosandvideo)
 
-app.listen(SERVER_PORT, () => console.log(`Msal Node Auth Code Sample app listening on port ${SERVER_PORT}!`))
+app.listen(80, () => console.log(`Msal Node Auth Code Sample app listening on port ${SERVER_PORT}!`))
