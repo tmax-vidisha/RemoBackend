@@ -37,7 +37,7 @@ router.route("/announcement/:token").get(getAnnouncementData);
 router.route("/navigation/:token").get(getNavigationData);
 router.route("/quicklinksdata/:token").get(getRemoQuickLinkData);
 router.route("/orgChart/:token").get(getOrgChartData);
-router.route("/ceomsg/:token").get(getCeoMsgData);
+router.route("/ceomsg/:token").get(getCeoMsgData); 
 router.route("/DepartmentMaster/:token").get(getDepartmentListData);
 router.route("/news/:token").get(getRemoNews);
 router.route("/emp/:token").get(getEmpData);

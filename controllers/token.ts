@@ -630,7 +630,7 @@ const getOrgChartData = asyncHandler(
         // await axios.get('https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location', {
         // await axios.get(`https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/0ec4e29a-d2ec-4835-a011-ea8a3fe33ed4/items?$expand=fields`, {
         await axios.get(
-          `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/4ec2406b-7a29-46ca-91f8-0f21dde53c2f`,
+          `https://graph.microsoft.com/v1.0/sites/tmxin.sharepoint.com,39018770-3534-4cef-a057-785c43b6a200,47c126a5-33ee-420a-a84a-c8430a368a43/lists/4ec2406b-7a29-46ca-91f8-0f21dde53c2f/items?$expand=fields`,
           {
             headers: {
               Authorization: `Bearer ${token} `,
