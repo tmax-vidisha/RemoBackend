@@ -8,7 +8,7 @@ import {
   copylinkDriveItem,
   getAllOneDriveSharedItems,
   getAllOneDriveRecentFiles,
-  getAllOneDrivePolicyItems, //policy
+  getAllOneDrivePolicyItems,
   getAllOneDriveItemDownloadUrl,
   getAllStarred,
   getAllTrashed,
